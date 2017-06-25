@@ -1,0 +1,19 @@
+<%@page import="br.com.pi.persistencia.VeiculoDB"%>
+<%@page import="br.com.pi.dominio.Veiculo"%>
+<%
+
+Veiculo veiculo = new Veiculo();
+veiculo.setPlaca(request.getParameter("placa"));
+veiculo.setChassi(request.getParameter("chassi"));
+veiculo.setAno(Integer.parseInt(request.getParameter("ano")));
+veiculo.setModelo(request.getParameter("modelo"));
+veiculo.setMarca(request.getParameter("marca"));
+veiculo.setEstadoVeiculo(request.getParameter("estadoVeiculo"));
+veiculo.setPrecoBase(Double.parseDouble(request.getParameter("precoBase")));
+veiculo.setAdicionais(request.getParameter("adicionais"));
+
+//VeiculoDB.inserir(veiculo);
+
+out.println(veiculo.getAno());
+
+%>
