@@ -32,9 +32,9 @@
   <ul id="slide-out" class="side-nav fixed">
     <li><div class="userView">
     <div class="background">
-      <img src="https://0.s3.envato.com/files/82339175/flat5_prev.jpg">
+      <img src="../res/img/capa.jpg">
     </div>
-    <a href="#!user"><img class="circle" src="http://www.macerptechnologies.com/images/MacImages/teacher.png"></a>
+    <a href="#!user"><img class="circle" src="../res/img/usuario.png"></a>
     <a href="#!name"><span class="white-text name">Olá, Admin</span></a>
     <a href="#!email"><span class="white-text email">admin@gmail.com</span></a>
     </div></li>

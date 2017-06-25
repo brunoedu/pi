@@ -70,7 +70,7 @@
 		                       type: "success",
 		                       allowEscapeKey: false
 		                   });
-		            	   location.href = "../cliente/?pagina=alugueis&funcionario="+data;
+		            	   location.href = "../funcionario/?pagina=alugueis&funcionario="+data;
 	            	   }else{
 		                   swal({
 		                       title: "Erro!",

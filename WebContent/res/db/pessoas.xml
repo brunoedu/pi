@@ -16,22 +16,6 @@
     <senha>123</senha>
   </pessoa>
   <pessoa>
-    <nome>Bruno</nome>
-    <cpf>44941880855</cpf>
-    <cnh>23131231232</cnh>
-    <tipo>c</tipo>
-    <rg>124123123</rg>
-    <telefone>4123123123</telefone>
-    <dataNascimento>2017-12-12 02:00:00.0 UTC</dataNascimento>
-    <logradouro>Rua José Meirelles</logradouro>
-    <numero>101</numero>
-    <cidade>Guaratinguetá</cidade>
-    <estado>SP</estado>
-    <cep>12518710</cep>
-    <email>bruno2@gmail.com</email>
-    <senha>123</senha>
-  </pessoa>
-  <pessoa>
     <nome>Funcionário</nome>
     <cpf>13213213213</cpf>
     <cargo>Vendedor</cargo>
@@ -45,22 +29,6 @@
     <estado>SP</estado>
     <cep>12518710</cep>
     <email>funcionario@gmail.com</email>
-    <senha>123</senha>
-  </pessoa>
-  <pessoa>
-    <nome>Bruno</nome>
-    <cpf>12312312321</cpf>
-    <cargo>Vendedor</cargo>
-    <tipo>f</tipo>
-    <rg>213123123</rg>
-    <telefone>4151231231</telefone>
-    <dataNascimento>2017-12-12 02:00:00.0 UTC</dataNascimento>
-    <logradouro>Rua José Meirelles</logradouro>
-    <numero>101</numero>
-    <cidade>Guaratinguetá</cidade>
-    <estado>SP</estado>
-    <cep>12518710</cep>
-    <email>brunofunc@gmail.com</email>
     <senha>123</senha>
   </pessoa>
 </list>

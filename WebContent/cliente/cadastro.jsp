@@ -199,6 +199,7 @@
 	                       text: "Falha ao cadastrar cliente.",
 	                       type: "error",
 	                   });
+	                   setMask();
 	               }
 		    });
 			

@@ -1,0 +1,12 @@
+<list>
+  <veiculo>
+    <placa>asd1231</placa>
+    <chassi>124214124</chassi>
+    <ano>2006</ano>
+    <modelo>Celta 1.0</modelo>
+    <marca>Chevrolet</marca>
+    <estadoVeiculo>Em Atividade</estadoVeiculo>
+    <precoBase>250.0</precoBase>
+    <adicionais>Ar-condicionado, Vidro Elétrico</adicionais>
+  </veiculo>
+</list>

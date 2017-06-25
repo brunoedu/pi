@@ -12,8 +12,10 @@ veiculo.setEstadoVeiculo(request.getParameter("estadoVeiculo"));
 veiculo.setPrecoBase(Double.parseDouble(request.getParameter("precoBase")));
 veiculo.setAdicionais(request.getParameter("adicionais"));
 
-//VeiculoDB.inserir(veiculo);
-
-out.println(veiculo.getAno());
+if(VeiculoDB.inserir(veiculo)){
+	out.println(false);
+}else{
+	out.println(true); 
+}
 
 %>

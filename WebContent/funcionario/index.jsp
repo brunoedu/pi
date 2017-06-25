@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="br.com.pi.persistencia.PessoaDB"%>
+<%@page import="br.com.pi.dominio.Pessoa"%>   
     
 <%
    String funcionario = request.getParameter("funcionario");
@@ -8,6 +10,8 @@
        pagina = "login";
    }
    pagina = pagina + ".jsp";
+   
+   Pessoa usuario = PessoaDB.getByCpf(funcionario); 
    
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -33,11 +37,11 @@
   <ul id="slide-out" class="side-nav fixed">
     <li><div class="userView">
     <div class="background">
-      <img src="https://0.s3.envato.com/files/82339175/flat5_prev.jpg">
+      <img src="../res/img/capa.jpg">
     </div>
-    <a href="#!user"><img class="circle" src="http://www.macerptechnologies.com/images/MacImages/teacher.png"></a>
-    <a href="#!name"><span class="white-text name">Olá, Funcionário</span></a>
-    <a href="#!email"><span class="white-text email">funcionario@gmail.com</span></a>
+    <a href="#!user"><img class="circle" src="../res/img/usuario.png"></a>
+    <a href="#!name"><span class="white-text name">Olá, <%=usuario.getNome()%></span></a>
+    <a href="#!email"><span class="white-text email"><%=usuario.getEmail()%></span></a>
     </div></li>
 	
 	

@@ -34,7 +34,7 @@
 					<td><%=funcionario.getEstado() %></td>
 					<td><%=funcionario.getTelefone() %></td>
 					<td><%=funcionario.getEmail() %></td>
-					<td><a href="javascript:excluir(<%=funcionario.getCpf() %>, <%=funcionario.getNome() %>)" data-toggle="tooltip" title="Excluir"><i class="material-icons pointer red-text text-darken-1">delete</i></a> </td>
+					<td><a href="javascript:excluir('<%=funcionario.getCpf() %>', '<%=funcionario.getNome() %>')" data-toggle="tooltip" title="Excluir"><i class="material-icons pointer red-text text-darken-1">delete</i></a> </td>
 	          	</tr>
 	          <%	
 	          	}
@@ -152,95 +152,96 @@
   </div> -->
 </div>
 <script type="text/javascript">
-function validar(){
+	function validar(){
 	
-	var dados = {
-		nome: $('#nome').val(),
-		cpf: $('#cpf').val(),
-		cargo: $('#cargo').val(),
-		rg: $('#rg').val(),	
-		telefone: $('#tel').val(),	
-		dataNascimento: $('#dataNasc').val(),
-		logradouro: $('#endereco').val(),
-		numero: $('#numero').val(),
-		cidade: $('#cidade').val(),
-		estado: $('#estado').val(),
-		cep: $('#cep').val(),
-		email: $('#email').val(),
-		senha: $('#senha').val(),
-		tipo: "f",
-	};
-	
-	console.log(dados);
-	
-	swal({
-		  title: 'Cadastro',
-		  text: 'Efetuando cadastro, aguarde um momento!',
-		  showConfirmButton: false,
-		  allowOutsideClick: false,
-		  allowEscapeKey: false,
-		  allowEnterKey: false,
-		  showLoaderOnConfirm: true
-	});
-	swal.showLoading();
-	
-	setTimeout(function(){
-		$.ajax({
-	           url: "../api/cadastrar.jsp",
-	           data: {
-	        	    nome: dados.nome,
-		   			cpf: dados.cpf,
-		   			cargo: dados.cargo,
-		   			rg: dados.rg,	
-		   			telefone: dados.telefone,	
-		   			dataNascimento: '12/12/2017',
-		   			logradouro: dados.logradouro,
-		   			numero: dados.numero,
-		   			cidade: dados.cidade,
-		   			estado: dados.estado,
-		   			cep: dados.cep,
-		   			tipo: dados.tipo,
-		   			email: dados.email,
-		   			senha: dados.senha,
-	           },
-	           type: "GET",
-               success: function (data) {
-            	   console.log(data.trim());
-            	   if(data.trim()!="false"){
-	                   swal({
-	                       title: "Sucesso!",
-	                       text: "Funcionário cadastrado com sucesso",
-	                       type: "success",
-	                       allowEscapeKey: false,
-	          			   allowOutsideClick: false,
-	                   }).then(function () {
-		            	   location.href = "../admin/?pagina=funcionarios";
-	                   });
-            	   }else{
+		var dados = {
+			nome: $('#nome').val(),
+			cpf: $('#cpf').val(),
+			cargo: $('#cargo').val(),
+			rg: $('#rg').val(),	
+			telefone: $('#tel').val(),	
+			dataNascimento: $('#dataNasc').val(),
+			logradouro: $('#endereco').val(),
+			numero: $('#numero').val(),
+			cidade: $('#cidade').val(),
+			estado: $('#estado').val(),
+			cep: $('#cep').val(),
+			email: $('#email').val(),
+			senha: $('#senha').val(),
+			tipo: "f",
+		};
+		
+		console.log(dados);
+		
+		swal({
+			  title: 'Cadastro',
+			  text: 'Efetuando cadastro, aguarde um momento!',
+			  showConfirmButton: false,
+			  allowOutsideClick: false,
+			  allowEscapeKey: false,
+			  allowEnterKey: false,
+			  showLoaderOnConfirm: true
+		});
+		swal.showLoading();
+		
+		setTimeout(function(){
+			$.ajax({
+		           url: "../api/cadastrar.jsp",
+		           data: {
+		        	    nome: dados.nome,
+			   			cpf: dados.cpf,
+			   			cargo: dados.cargo,
+			   			rg: dados.rg,	
+			   			telefone: dados.telefone,	
+			   			dataNascimento: '12/12/2017',
+			   			logradouro: dados.logradouro,
+			   			numero: dados.numero,
+			   			cidade: dados.cidade,
+			   			estado: dados.estado,
+			   			cep: dados.cep,
+			   			tipo: dados.tipo,
+			   			email: dados.email,
+			   			senha: dados.senha,
+		           },
+		           type: "GET",
+	               success: function (data) {
+	            	   console.log(data.trim());
+	            	   if(data.trim()!="false"){
+		                   swal({
+		                       title: "Sucesso!",
+		                       text: "Funcionário cadastrado com sucesso",
+		                       type: "success",
+		                       allowEscapeKey: false,
+		          			   allowOutsideClick: false,
+		                   }).then(function () {
+			            	   location.href = "../admin/?pagina=funcionarios";
+		                   });
+	            	   }else{
+		                   swal({
+		                       title: "Erro!",
+		                       text: "Falha ao cadastrar funcionário. CPF ou E-mail já cadastrado.",
+		                       type: "error",
+		                   });
+		                   setMask();
+	            	   }
+	               },
+	               error: function (data) {
+	                   console.log(data);
 	                   swal({
 	                       title: "Erro!",
-	                       text: "Falha ao cadastrar funcionário. CPF ou E-mail já cadastrado.",
+	                       text: "Falha ao cadastrar funcionário.",
 	                       type: "error",
 	                   });
-	                   setMask();
-            	   }
-               },
-               error: function (data) {
-                   console.log(data);
-                   swal({
-                       title: "Erro!",
-                       text: "Falha ao cadastrar funcionário.",
-                       type: "error",
-                   });
-               }
-	    });
-		
-	}, 2000);
-}
+	               }
+		    });
+			
+		}, 2000);
+	}
 	function excluir(cpf, nome){
+		
 		swal({
 			  title: 'Excluir funcionário?',
-			  text: "Deseja realmente excluir o(a) funcionário(a)"+nome+"?",
+			  text: "Deseja realmente excluir o(a) funcionário(a) "+nome+"?",
 			  type: 'warning',
 			  showCancelButton: true,
 			  confirmButtonColor: '#3085d6',
@@ -248,6 +249,16 @@ function validar(){
 			  confirmButtonText: 'Excluir',
 			  cancelButtonText: 'Cancelar'
 			}).then(function () {
+				swal({
+					  title: 'Excluindo',
+					  text: 'Excluindo funcionário, aguarde um momento!',
+					  showConfirmButton: false,
+					  allowOutsideClick: false,
+					  allowEscapeKey: false,
+					  allowEnterKey: false,
+					  showLoaderOnConfirm: true
+				});
+				swal.showLoading();
 				setTimeout(function(){
 					$.ajax({
 				           url: "../api/excluir.jsp",
