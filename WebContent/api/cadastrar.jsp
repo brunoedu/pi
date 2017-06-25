@@ -28,8 +28,11 @@ pessoa.setCep(request.getParameter("cep"));
 pessoa.setEmail(request.getParameter("email"));
 pessoa.setSenha(request.getParameter("senha"));
 
-PessoaDB.inserir(pessoa);
+if(PessoaDB.inserir(pessoa)){
+	out.println(false);
+}else{
+	out.println(pessoa.getCpf()); 
+}
 
-out.println(pessoa.getCpf()); 
 
 %>

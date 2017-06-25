@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@page import="br.com.pi.persistencia.PessoaDB"%>
+<%@page import="br.com.pi.dominio.Pessoa"%>    
 <%
    String usuario = request.getParameter("usuario");
    String pagina = request.getParameter("pagina");
@@ -10,6 +11,9 @@
        pagina = "login";
    }
    pagina = pagina + ".jsp";
+   
+
+   Pessoa cliente = PessoaDB.getByCpf(usuario);  
    
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -38,8 +42,8 @@
       <img src="https://0.s3.envato.com/files/82339175/flat5_prev.jpg">
     </div>
     <a href="#!user"><img class="circle" src="http://www.macerptechnologies.com/images/MacImages/teacher.png"></a>
-    <a href="#!name"><span class="white-text name">Olá, Usuário</span></a>
-    <a href="#!email"><span class="white-text email">usuario@gmail.com</span></a>
+    <a href="#!name"><span class="white-text name" id="nomeMenu"><%=cliente.getNome()%></span></a>
+    <a href="#!email"><span class="white-text email" id="emailMenu"><%=cliente.getEmail()%></span></a>
     </div></li>
 	
 	<%if(pagina.equals("home.jsp")){%>

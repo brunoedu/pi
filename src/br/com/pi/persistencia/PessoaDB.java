@@ -7,17 +7,30 @@ import java.util.ArrayList;
 import com.thoughtworks.xstream.XStream;
 
 import br.com.pi.dominio.Pessoa;
-import dominio.Lider;
 
 public class PessoaDB {
 	private static String caminho = Conexao.CAMINHO;
     
     private static ArrayList<Pessoa> lista = new ArrayList<Pessoa>();
     
-    public static void inserir(Pessoa pessoa){
+    public static boolean inserir(Pessoa pessoa){
         lerXml();
-        lista.add(pessoa);
-        salvarXml();
+
+        boolean pessoaEncontrada = false;
+        for(int i=0; i < lista.size(); i++){
+        	Pessoa pes = lista.get(i);
+            if (pes.getCpf().equals(pessoa.getCpf()) || pes.getEmail().equals(pessoa.getEmail())){
+            	pessoaEncontrada = true;
+                break;
+            }
+        }
+        
+        if(!pessoaEncontrada){
+	        lista.add(pessoa);
+	        salvarXml();
+        }
+        
+        return pessoaEncontrada;
     }
     
     public static void alterar(Pessoa pessoa){
@@ -27,11 +40,11 @@ public class PessoaDB {
         salvarXml();
     }
     
-    public static void excluir(int cpf){
+    public static void excluir(String cpf){
         lerXml();
         for(int i=0; i < lista.size(); i++){
             Pessoa pes = lista.get(i);
-            if (pes.getCpf()==cpf){
+            if (pes.getCpf().equals(cpf)){
                 lista.remove(i);
             }
         }
@@ -42,7 +55,7 @@ public class PessoaDB {
         return lista;
     }
     
-    public static int validar(String email, String senha, String tipo){
+    public static String validar(String email, String senha, String tipo){
         lerXml();
         Pessoa pessoaEncontrada = null;
         for(int i=0; i < lista.size(); i++){
@@ -52,6 +65,9 @@ public class PessoaDB {
                 break;
             }
         }
+        if(pessoaEncontrada==null)
+        	return "false";
+        
         return pessoaEncontrada.getCpf();
     }
     
@@ -78,17 +94,30 @@ public class PessoaDB {
         }
     }
     
-    public static Pessoa getByCpf(int cpf){
+    public static Pessoa getByCpf(String cpf){
         lerXml();
         Pessoa pessoaEncontrada = null;
         for(int i=0; i < lista.size(); i++){
         	Pessoa cadaPessoa = lista.get(i);
         	
-            if (cadaPessoa.getCpf()==cpf){
+            if (cadaPessoa.getCpf().equals(cpf)){
             	pessoaEncontrada = cadaPessoa;
                 break;
             }
         }
         return pessoaEncontrada;
+    }
+    
+
+    public static ArrayList<Pessoa> getAllByTipo(String tipo){
+        lerXml();
+        ArrayList<Pessoa> listaByTipo = new ArrayList<Pessoa>();
+        for(int i=0; i < lista.size(); i++){
+        	Pessoa cadaPessoa = lista.get(i);        	
+            if (cadaPessoa.getTipo().equals(tipo)){
+            	listaByTipo.add(cadaPessoa);
+            }
+        }
+        return listaByTipo;
     }
 }

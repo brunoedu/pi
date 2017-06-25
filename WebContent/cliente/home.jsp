@@ -1,5 +1,4 @@
-
- <div class="slider">
+<div class="slider">
     <ul class="slides">
       <li>
         <img src="https://1.bp.blogspot.com/-TmbR5rqA2e4/V02iginVEoI/AAAAAAACYB0/8x1Ax35MGOIy7p78MfmVVbbFE8EiJykQQCLcB/s1600/novo-Cruze-2017%2B%25281%2529.jpg"> <!-- random image -->
@@ -29,28 +28,28 @@
 	  <div class="row">
 	  <div class="col s12 m4">
 	    <div class="icon-block">
-	      <h2 class="center brown-text"><i class="material-icons">flash_on</i></h2>
-	      <h5 class="center">Speeds up development</h5>
+	      <h2 class="center brown-text"><i class="material-icons">security</i></h2>
+	      <h5 class="center">Maior Segurança</h5>
 	
-	      <p class="light">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.</p>
+	      <p class="light">Nossos veículos são semanalmente revisados e possuem todos os aspectos de segurança para sua viagem.</p>
 	    </div>
 	  </div>
 	
 	  <div class="col s12 m4">
 	    <div class="icon-block">
 	      <h2 class="center brown-text"><i class="material-icons">group</i></h2>
-	      <h5 class="center">User Experience Focused</h5>
+	      <h5 class="center">Foco na Satisfação do Cliente</h5>
 	
-	      <p class="light">By utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.</p>
+	      <p class="light">A Martinelli's Company possui os melhores e mais atenciosos vendedores que sempre proporcionam a melhor experiência para sua viagem.</p>
 	    </div>
 	  </div>
 	
 	  <div class="col s12 m4">
 	    <div class="icon-block">
-	      <h2 class="center brown-text"><i class="material-icons">settings</i></h2>
-	      <h5 class="center">Easy to work with</h5>
+	      <h2 class="center brown-text"><i class="material-icons">attach_money</i></h2>
+	      <h5 class="center">Melhor Preço e Melhores Carros</h5>
 	
-	      <p class="light">We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.</p>
+	      <p class="light">Possuímos os melhores preços e os melhores carros do mercado, proporcionando o melhor aproveitamento de custo e benefícios de seus clientes.</p>
 	    </div>
 	  </div>
 	</div>

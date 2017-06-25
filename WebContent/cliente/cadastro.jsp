@@ -102,7 +102,7 @@
 				      </div>
 				      <div class="row">
 				        <div class="input-field col s12">
-					      <button class="btn waves-effect waves-light right" type="submit" name="action">Cadastrar
+					      <button class="btn waves-effect waves-light right cyan lighten-1" type="submit" name="action">Cadastrar
 						    <i class="material-icons right">arrow_forward</i>
 						  </button>			          
 				        </div>
@@ -133,6 +133,8 @@
 			cidade: $('#cidade').val(),
 			estado: $('#estado').val(),
 			cep: $('#cep').val(),
+			email: $('#email').val(),
+			senha: $('#senha').val(),
 			tipo: "c",
 		};
 		
@@ -165,19 +167,30 @@
 			   			estado: dados.estado,
 			   			cep: dados.cep,
 			   			tipo: dados.tipo,
+			   			email: dados.email,
+			   			senha: dados.senha,
 		           },
 		           type: "GET",
 	               success: function (data) {
-	            	   console.log(data);
-	                   swal({
-	                       title: "Sucesso!",
-	                       text: "Cliente cadastrado com sucesso",
-	                       type: "success",
-	                       allowEscapeKey: false,
-	          			   allowOutsideClick: false,
-	                   }).then(function () {
-		            	   location.href = "../cliente/?pagina=home&usuario="+data;
-	                   });
+	            	   console.log(data.trim());
+	            	   if(data.trim()!="false"){
+		                   swal({
+		                       title: "Sucesso!",
+		                       text: "Cliente cadastrado com sucesso",
+		                       type: "success",
+		                       allowEscapeKey: false,
+		          			   allowOutsideClick: false,
+		                   }).then(function () {
+			            	   location.href = "../cliente/?pagina=home&usuario="+data;
+		                   });
+	            	   }else{
+		                   swal({
+		                       title: "Erro!",
+		                       text: "Falha ao cadastrar cliente. CPF ou E-mail já cadastrado.",
+		                       type: "error",
+		                   });
+		                   setMask();
+	            	   }
 	               },
 	               error: function (data) {
 	                   console.log(data);
@@ -238,6 +251,44 @@
             });
         }
     });
+    
+    function setMask(){
+    	$('#cnh').inputmask({
+  		  mask:"99999999999",
+  		  showMaskOnHover: false,
+  		  showMaskOnFocus: false,
+  		  clearMaskOnLostFocus: true,
+  		  removeMaskOnSubmit: true,
+  	  });
+  	  $('#tel').inputmask({
+  		  mask:"(99) 9999-9999",
+  		  showMaskOnHover: false,
+  		  showMaskOnFocus: false,
+  		  clearMaskOnLostFocus: true,
+  		  removeMaskOnSubmit: true,
+  	  });
+  	  $('#rg').inputmask({
+  		  mask:"99.999.999-*",
+  		  showMaskOnHover: false,
+  		  showMaskOnFocus: false,
+  		  clearMaskOnLostFocus: true,
+  		  removeMaskOnSubmit: true,
+  	  });
+  	  $('#cpf').inputmask({
+  		  mask:"999.999.999-99",
+  		  showMaskOnHover: false,
+  		  showMaskOnFocus: false,
+  		  clearMaskOnLostFocus: true,
+  		  removeMaskOnSubmit: true,
+  	  });
+  	  $('#cep').inputmask({
+  		  mask:"99999-999",
+  		  showMaskOnHover: false,
+  		  showMaskOnFocus: false,
+  		  clearMaskOnLostFocus: true,
+  		  removeMaskOnSubmit: true,
+  	  });
+    }
 	
 	$(document).ready(function(){
 	  $('#header').css('padding-left','0px');
@@ -248,40 +299,6 @@
 	    selectYears: 90
   	  });
 
-	  $('#cnh').inputmask({
-		  mask:"99999999999",
-		  showMaskOnHover: false,
-		  showMaskOnFocus: false,
-		  clearMaskOnLostFocus: true,
-		  removeMaskOnSubmit: true,
-	  });
-	  $('#tel').inputmask({
-		  mask:"(99) 9999-9999",
-		  showMaskOnHover: false,
-		  showMaskOnFocus: false,
-		  clearMaskOnLostFocus: true,
-		  removeMaskOnSubmit: true,
-	  });
-	  $('#rg').inputmask({
-		  mask:"99.999.999-*",
-		  showMaskOnHover: false,
-		  showMaskOnFocus: false,
-		  clearMaskOnLostFocus: true,
-		  removeMaskOnSubmit: true,
-	  });
-	  $('#cpf').inputmask({
-		  mask:"999.999.999-99",
-		  showMaskOnHover: false,
-		  showMaskOnFocus: false,
-		  clearMaskOnLostFocus: true,
-		  removeMaskOnSubmit: true,
-	  });
-	  $('#cep').inputmask({
-		  mask:"99999-999",
-		  showMaskOnHover: false,
-		  showMaskOnFocus: false,
-		  clearMaskOnLostFocus: true,
-		  removeMaskOnSubmit: true,
-	  });
+	  setMask();
 	});
 </script>

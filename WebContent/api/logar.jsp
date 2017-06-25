@@ -6,15 +6,13 @@ String senha = request.getParameter("senha");
 String tipo = request.getParameter("tipo");
 
 if(!tipo.equals("a")){
-	String cpf = PessoaDB.validar(email,senha,tipo);
-
-	if (cpf != null){
-	    out.println(cpf);
-	}else{
-	    out.println(false);
-	}
+	out.println(PessoaDB.validar(email, senha, tipo));
 }else{
-	out.println(true);
+	if(email.equals("admin@gmail.com") && senha.equals("123")){
+		out.println(true);
+	}else{
+		out.println(false);
+	}
 }
 
 %>

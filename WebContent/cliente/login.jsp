@@ -1,7 +1,7 @@
 
   <div class="container">
       <div class="row center">
-      <h4>Login</h4>
+      <h4>Login Cliente</h4>
         <div class="col s6 m6">
           <div class="card small">
             <div class="card-content">
@@ -22,10 +22,10 @@
 			      </div>
 			      <div class="row">
 			        <div class="input-field col s6">
-				      <a href="/PI/cliente/?pagina=cadastro">Não tem cadastro? Cadastre-se agora.</a>			          
+				      <a href="../cliente/?pagina=cadastro">Não tem cadastro? Cadastre-se agora.</a>			          
 			        </div>
 			        <div class="input-field col s6">
-				      <button class="btn waves-effect waves-light right" type="submit" name="action">Entrar
+				      <button class="btn waves-effect waves-light right cyan lighten-1" type="submit" name="action">Entrar
 					    <i class="material-icons right">arrow_forward</i>
 					  </button>			          
 			        </div>
@@ -65,20 +65,28 @@
 		           },
 		           type: "GET",
 	               success: function (data) {
-	            	   console.log(data);
-	                   swal({
-	                       title: "Sucesso!",
-	                       text: "Logado com sucesso",
-	                       type: "success",
-	                       allowEscapeKey: false
-	                   });
-	            	   location.href = "../cliente/?pagina=home&usuario="+data;
+	            	   console.log(data.trim());
+	            	   if(data.trim()!="false"){
+		                   swal({
+		                       title: "Sucesso!",
+		                       text: "Logado com sucesso",
+		                       type: "success",
+		                       allowEscapeKey: false
+		                   });
+		            	   location.href = "../cliente/?pagina=home&usuario="+data;
+	            	   }else{
+		                   swal({
+		                       title: "Erro!",
+		                       text: "Email ou senha não encontrado(s).",
+		                       type: "error",
+		                   });	            		   
+	            	   }
 	               },
 	               error: function (data) {
 	                   console.log(data);
 	                   swal({
 	                       title: "Erro!",
-	                       text: "Email ou senha não encontrado(s).",
+	                       text: "Servidor fora do ar, tente novamente mais tarde.",
 	                       type: "error",
 	                   });
 	               }

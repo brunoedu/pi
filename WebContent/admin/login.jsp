@@ -1,7 +1,7 @@
 
   <div class="container">
       <div class="row center">
-      <h4>Login</h4>
+      <h4>Login Administrador</h4>
         <div class="col s6 m6">
           <div class="card small">
             <div class="card-content">
@@ -62,20 +62,28 @@
 		           },
 		           type: "GET",
 	               success: function (data) {
-	            	   console.log(data);
-	                   /* swal({
-	                       title: "Sucesso!",
-	                       text: "Logado com sucesso",
-	                       type: "success",
-	                       allowEscapeKey: false
-	                   }); */
-	            	   location.href = "../admin/?pagina=clientes";
+	            	   console.log(data.trim());
+	            	   if(data.trim()=="true"){
+		                   swal({
+		                       title: "Sucesso!",
+		                       text: "Logado com sucesso",
+		                       type: "success",
+		                       allowEscapeKey: false
+		                   });
+		            	   location.href = "../admin/?pagina=funcionarios";	            		   
+	            	   }else{
+		                   swal({
+		                       title: "Erro!",
+		                       text: "Email ou senha não encontrado(s).",
+		                       type: "error",
+		                   });
+	            	   }
 	               },
 	               error: function (data) {
 	                   console.log(data);
 	                   swal({
 	                       title: "Erro!",
-	                       text: "Email ou senha não encontrado(s).",
+	                       text: "Servidor fora do ar, tente novamente mais tarde.",
 	                       type: "error",
 	                   });
 	               }

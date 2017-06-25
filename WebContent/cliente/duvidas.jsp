@@ -13,7 +13,7 @@
       <div class="card">
         <div class="card-content">
           <!-- <span class="card-title">Nova Dúvida</span> -->
-          <a class="waves-effect waves-light btn" href="#modalNovaDuvida"><i class="material-icons left">help</i>Nova Dúvida</a>
+          <a class="waves-effect waves-light btn cyan lighten-1" href="#modalNovaDuvida"><i class="material-icons left">help</i>Nova Dúvida</a>
           
           <h5>Minhas Dúvidas</h5>		  
 		  <ul class="collection">

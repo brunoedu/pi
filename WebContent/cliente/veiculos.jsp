@@ -62,31 +62,30 @@
     <h4>Alugar Carro</h4>
 	<form class="col s12">      
       <div class="row">
-        <div class="input-field col s12">
-          <input id="dataRetirada" type="date" class="datepicker">
+        <div class="input-field col s6">
+	      <i class="material-icons prefix">date_range</i>
+          <input id="dataRetirada" type="date" class="datepicker" required>
           <label for="dataRetirada">Data de Retirada</label>
         </div>
       </div>   
       <div class="row">
-        <div class="input-field col s12">
-          <input id="dataEntrega" type="date" class="datepicker">
+        <div class="input-field col s6">
+	      <i class="material-icons prefix">date_range</i>
+          <input id="dataEntrega" type="date" class="datepicker" required>
           <label for="dataEntrega">Data de Entrega</label>
         </div>
       </div>
       <div class="row">
-        <div class="input-field col s12">
-          <input id="email" type="email" class="validate">
-          <label for="email">Email</label>
-        </div>
+	      <button class="btn waves-effect waves-light right cyan lighten-1" type="submit" name="action">Alugar
+		    <i class="material-icons right">directions_car</i>
+		  </button>
       </div>
     </form>
   </div>
-  <div class="modal-footer">
+<!--   <div class="modal-footer">
     <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Ok</a>
-  </div>
-  </div>
+  </div> -->
 </div>
-
 <script type="text/javascript">
 	$(document).ready(function(){
 	  // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
