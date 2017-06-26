@@ -7,6 +7,7 @@ public class Aluguel {
 	private int codigo;
 	private String cliente;
 	private String funcionario;
+	private String veiculo;
 	private Date dataRetirada;
 	private Date dataEntrega;
 	private boolean seguro;
@@ -30,6 +31,12 @@ public class Aluguel {
 	}
 	public void setFuncionario(String funcionario) {
 		this.funcionario = funcionario;
+	}
+	public String getVeiculo() {
+		return veiculo;
+	}
+	public void setVeiculo(String veiculo) {
+		this.veiculo = veiculo;
 	}
 	public Date getDataRetirada() {
 		return dataRetirada;

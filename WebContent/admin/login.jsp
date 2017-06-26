@@ -1,8 +1,11 @@
 
-  <div class="container">
       <div class="row center">
       <h4>Login Administrador</h4>
-        <div class="col s6 m6">
+      <div class="col s4 m4">
+	      <div class="col s12" >
+	      </div>
+      </div>
+        <div class="col s4 m4">
           <div class="card small">
             <div class="card-content">
               <form class="col s12" id="formulario" name="formulario" action="javascript:validar()" action="javascript:goHome()" method="post">
@@ -22,7 +25,7 @@
 			      </div>
 			      <div class="row">
 			        <div class="input-field col s12">
-				      <button class="btn waves-effect waves-light right" type="submit" name="action">Entrar
+				      <button class="btn waves-effect waves-light right cyan lighten-1" type="submit" name="action">Entrar
 					    <i class="material-icons right">arrow_forward</i>
 					  </button>			          
 			        </div>
@@ -32,7 +35,6 @@
           </div>
         </div>
      </div>
-</div>
 
 <script type="text/javascript">
 

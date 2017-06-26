@@ -10,6 +10,7 @@ veiculo.setModelo(request.getParameter("modelo"));
 veiculo.setMarca(request.getParameter("marca"));
 veiculo.setEstadoVeiculo(request.getParameter("estadoVeiculo"));
 veiculo.setPrecoBase(Double.parseDouble(request.getParameter("precoBase")));
+veiculo.setPrecoTotal(Double.parseDouble(request.getParameter("precoTotal")));
 veiculo.setAdicionais(request.getParameter("adicionais"));
 
 if(VeiculoDB.inserir(veiculo)){

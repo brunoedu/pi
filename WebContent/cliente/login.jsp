@@ -1,8 +1,11 @@
 
-  <div class="container">
       <div class="row center">
       <h4>Login Cliente</h4>
-        <div class="col s6 m6">
+      <div class="col s4 m4">
+	      <div class="col s12" >
+	      </div>
+      </div>
+        <div class="col s4 m4">
           <div class="card small">
             <div class="card-content">
               <form class="col s12" id="formulario" name="formulario" action="javascript:validar()" action="javascript:goHome()" method="post">
@@ -35,7 +38,6 @@
           </div>
         </div>
      </div>
-</div>
 
 <script type="text/javascript">
 

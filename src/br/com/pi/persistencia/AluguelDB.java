@@ -83,4 +83,17 @@ public class AluguelDB {
         }
         return aluguelEncontrado;
     }
+    
+    public static ArrayList<Aluguel> getByCliente(String cpf){
+        lerXml();
+        ArrayList<Aluguel> aluguelEncontrado = new ArrayList<Aluguel>();
+        for(int i=0; i < lista.size(); i++){
+        	Aluguel cadaAluguel = lista.get(i);
+        	
+            if (cadaAluguel.getCliente().equals(cpf)){
+            	aluguelEncontrado.add(cadaAluguel);
+            }
+        }
+        return aluguelEncontrado;
+    }
 }

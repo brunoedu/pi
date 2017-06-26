@@ -1,34 +1,50 @@
 <list>
   <pessoa>
-    <nome>Bruno</nome>
-    <cpf>44941880854</cpf>
-    <cnh>12312312312</cnh>
+    <nome>Orlando</nome>
+    <cpf>45769879798</cpf>
+    <cnh>12343445555</cnh>
     <tipo>c</tipo>
-    <rg>123124213</rg>
-    <telefone>1231251232</telefone>
+    <rg>766546546</rg>
+    <telefone>1234465465</telefone>
     <dataNascimento>2017-12-12 02:00:00.0 UTC</dataNascimento>
-    <logradouro>Rua José Meirelles</logradouro>
-    <numero>101</numero>
+    <logradouro>Rua Coronel Tamarindo</logradouro>
+    <numero>132</numero>
     <cidade>Guaratinguetá</cidade>
     <estado>SP</estado>
-    <cep>12518710</cep>
-    <email>bruno@gmail.com</email>
-    <senha>123</senha>
+    <cep>12501070</cep>
+    <email>orlandobloom@amiguinho.com</email>
+    <senha>xuxubeleza</senha>
   </pessoa>
   <pessoa>
-    <nome>Funcionário</nome>
-    <cpf>13213213213</cpf>
-    <cargo>Vendedor</cargo>
+    <nome>Gal</nome>
+    <cpf>51264365217</cpf>
+    <cargo>Amiguinha</cargo>
     <tipo>f</tipo>
-    <rg>123123123</rg>
-    <telefone>1231231232</telefone>
+    <rg>564654646</rg>
+    <telefone>5431678768</telefone>
+    <dataNascimento>2017-12-12 02:00:00.0 UTC</dataNascimento>
+    <logradouro>Praça Santos Dumont</logradouro>
+    <numero>45</numero>
+    <cidade>Guaratinguetá</cidade>
+    <estado>SP</estado>
+    <cep>12510080</cep>
+    <email>galzinha@abiguinha.com</email>
+    <senha>lalalalala</senha>
+  </pessoa>
+  <pessoa>
+    <nome>Cliente</nome>
+    <cpf>56328927659</cpf>
+    <cnh>13215123213</cnh>
+    <tipo>c</tipo>
+    <rg>958230749</rg>
+    <telefone>1516463465</telefone>
     <dataNascimento>2017-12-12 02:00:00.0 UTC</dataNascimento>
     <logradouro>Rua José Meirelles</logradouro>
     <numero>101</numero>
     <cidade>Guaratinguetá</cidade>
     <estado>SP</estado>
     <cep>12518710</cep>
-    <email>funcionario@gmail.com</email>
+    <email>cliente@gmail.com</email>
     <senha>123</senha>
   </pessoa>
 </list>

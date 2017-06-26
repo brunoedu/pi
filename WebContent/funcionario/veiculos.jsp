@@ -3,6 +3,7 @@
 <%@page import="br.com.pi.dominio.Pessoa"%>
 <%@page import="br.com.pi.dominio.Veiculo"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="java.text.DecimalFormat"%>
 <%
 	String funcionario = request.getParameter("funcionario");
 	String pagina = request.getParameter("pagina");
@@ -10,6 +11,8 @@
 	    pagina = "login";
 	}
 	pagina = pagina + ".jsp";
+	
+	DecimalFormat df = new DecimalFormat("###.#");
 	
 	ArrayList<Veiculo> veiculos = VeiculoDB.listar(); 
    
@@ -31,6 +34,7 @@
 	              <th>Chassi</th>
 				  <th>Estado</th>
 				  <th>Preço Base</th>
+				  <th>Preço Total</th>
 	          </tr>
 	        </thead>
 	
@@ -45,7 +49,8 @@
 					<td><%=veiculo.getAno() %></td>
 					<td><%=veiculo.getChassi() %></td>
 					<td><%=veiculo.getEstadoVeiculo() %></td>
-					<td><%=veiculo.getPrecoBase() %></td>
+					<td>R$ <%=df.format(veiculo.getPrecoBase()) %>,00</td>
+					<td>R$ <%=df.format(veiculo.getPrecoTotal()) %>,00</td>
 					<td><a href="#modalEditar" data-toggle="tooltip" title="Editar"><i class="material-icons pointer cyan-text text-lighten-1">mode_edit</i></a> <a href="javascript:excluir('<%=veiculo.getPlaca() %>', '<%=veiculo.getModelo() %>')" data-toggle="tooltip" title="Excluir"><i class="material-icons pointer red-text text-darken-1">delete</i></a> </td>
 	          	</tr>
 	          <%	
@@ -155,7 +160,12 @@
 			estadoVeiculo: $('#estadoVeiculo').val(),
 			precoBase: $('#precoBase').val().slice(0, -2),
 			adicionais: '',
+			precoTotal: '',
 		};
+		
+		console.log($('#adicionais').val().length);
+		
+		dados.precoTotal = Number($('#adicionais').val().length) * Number(30) + Number(dados.precoBase);
 		
 		$('#adicionais').val().forEach(function(adicional) {
 		    dados.adicionais += adicional+", ";
@@ -187,6 +197,7 @@
 			   		   chassi: dados.chassi,
 			   		   estadoVeiculo: dados.estadoVeiculo,
 			   		   precoBase: dados.precoBase,
+			   		   precoTotal: dados.precoTotal,
 			   		   adicionais: dados.adicionais,
 		           },
 		           type: "GET",

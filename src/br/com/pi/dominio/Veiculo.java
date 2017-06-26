@@ -9,6 +9,7 @@ public class Veiculo {
 	private String marca;
 	private String estadoVeiculo;
 	private double precoBase;
+	private double precoTotal;
 	private String foto;
 	private String adicionais;
 	
@@ -53,6 +54,12 @@ public class Veiculo {
 	}
 	public void setPrecoBase(double precoBase) {
 		this.precoBase = precoBase;
+	}
+	public double getPrecoTotal() {
+		return precoTotal;
+	}
+	public void setPrecoTotal(double precoTotal) {
+		this.precoTotal = precoTotal;
 	}
 	public String getFoto() {
 		return foto;

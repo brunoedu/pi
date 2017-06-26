@@ -37,15 +37,15 @@
     <div class="col s6 m6">
       <div class="card medium">
         <div class="card-image">
-          <img src="https://1.bp.blogspot.com/-TmbR5rqA2e4/V02iginVEoI/AAAAAAACYB0/8x1Ax35MGOIy7p78MfmVVbbFE8EiJykQQCLcB/s1600/novo-Cruze-2017%2B%25281%2529.jpg">
+          <img src="../res/img/carro1.jpg">
           <span class="card-title"><%=veiculo.getModelo() %></span>
         </div>
         <div class="card-content">
           <p><%=veiculo.getAdicionais() %>.</p>
-          <h5>R$ <%=df.format(veiculo.getPrecoBase()) %>,00</h5>
+          <h5>R$ <%=df.format(veiculo.getPrecoTotal()) %>,00</h5>
         </div>
         <div class="card-action">
-          <a href="#modalAlugar">Alugar Carro</a>
+          <a href="#modalAlugar" onclick="javascript:setVeiculo('<%=veiculo.getPlaca() %>','<%=veiculo.getPrecoTotal() %>')">Alugar Carro</a>
         </div>
       </div>
     </div>
@@ -54,7 +54,8 @@
     %>
   </div>
 </div>
-
+<input type="hidden" id="veiculoAluguel" value=""/>
+<input type="hidden" id="preco" value=""/>
 <div id="modalAlugar" class="modal">
   <div class="modal-content">
     <h4>Alugar Carro</h4>
@@ -90,13 +91,24 @@
   </div> -->
 </div>
 <script type="text/javascript">
+
+	function setVeiculo(placa, preco){
+		console.log(placa, preco);
+		$('#veiculoAluguel').val(placa);
+		$('#preco').val(preco);
+	}
+	
 	function validar(){
 		
 		var dados = {
 			dataRetirada: $('#dataRetirada').val(),
 			dataEntrega: $('#dataEntrega').val(),
-			seguro: $('#seguro').val(),
+			seguro: '',
+			veiculo: $('#veiculoAluguel').val(),
+			precoTotal: $('#preco').val(),
 		};
+			
+		dados.seguro = $('#seguro').val()=='on' ? true:false;
 				
 		console.log(dados);
 		
@@ -119,11 +131,13 @@
 		        	   dataRetirada: "26/06/2017",
 		        	   dataEntrega: "03/06/2017",
 		        	   seguro: dados.seguro,
+		        	   veiculo: dados.veiculo,
+		        	   precoTotal: dados.precoTotal,
 		           },
 		           type: "GET",
 	               success: function (data) {
 	            	   console.log(data.trim());
-	            	   if(data.trim()=="true"){
+	            	   if(data.trim()=="false"){
 		                   swal({
 		                       title: "Sucesso!",
 		                       text: "Aluguel solicitado com sucesso.",
