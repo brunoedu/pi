@@ -1,3 +1,28 @@
+<%@page import="br.com.pi.persistencia.PessoaDB"%>
+<%@page import="br.com.pi.persistencia.AluguelDB"%>
+<%@page import="br.com.pi.persistencia.VeiculoDB"%>
+<%@page import="br.com.pi.dominio.Pessoa"%>
+<%@page import="br.com.pi.dominio.Aluguel"%>
+<%@page import="br.com.pi.dominio.Veiculo"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%
+	String usuario = request.getParameter("usuario");
+	String pagina = request.getParameter("pagina");
+	if ((pagina != null) && (pagina.equals("cadastro"))){
+	     
+	}else if (pagina == null || usuario == null){
+	    pagina = "login";
+	}
+	pagina = pagina + ".jsp";
+	
+	DecimalFormat df = new DecimalFormat("###.#");
+	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+	
+	ArrayList<Aluguel> alugueis = AluguelDB.getByCliente(usuario); 
+   
+%>
  <nav>
    <div class="nav-wrapper cyan lighten-1">
      <div class="col s12">
@@ -9,22 +34,29 @@
 <div class="container">
   <h3 class="center-align">Meus Aluguéis</h3>
   <div class="row">
+    <% 
+	  for(Aluguel aluguel:alugueis){
+		  Veiculo veiculo = VeiculoDB.getByPlaca(aluguel.getVeiculo());
+	%>
     <div class="col s6 m6">
       <div class="card medium">
         <div class="card-image">
-          <img src="https://1.bp.blogspot.com/-TmbR5rqA2e4/V02iginVEoI/AAAAAAACYB0/8x1Ax35MGOIy7p78MfmVVbbFE8EiJykQQCLcB/s1600/novo-Cruze-2017%2B%25281%2529.jpg">
-          <span class="card-title">Chevrolet Cruze</span>
+          <img src="../res/img/carro1.jpg">
+          <span class="card-title"><%=veiculo.getModelo() %></span>
         </div>
         <div class="card-content">
-          <p>Ar condicionado, vidro elétrico.</p>
-          <p>11/06/2017 a 14/06/2017</p>
-          <h5>R$ 350,00</h5>
+          <p><%=veiculo.getAdicionais() %>.</p>
+          <p><%=dateFormat.format(aluguel.getDataRetirada()) %> a <%=dateFormat.format(aluguel.getDataEntrega()) %></p>
+          <h5>R$ <%=df.format(aluguel.getPrecoTotal()) %>,00</h5>
         </div>
         <div class="card-action">
           <a href="#modalComprovante">Comprovante</a>
         </div>
       </div>
     </div>
+    <%	
+   		}
+    %>
   </div>
 </div>
 

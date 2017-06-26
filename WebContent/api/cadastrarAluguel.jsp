@@ -20,7 +20,7 @@ aluguel.setDataRetirada(dataRetirada);
 aluguel.setDataEntrega(dataEntrega);
 aluguel.setSeguro(seguro);
 aluguel.setPrecoTotal(Double.parseDouble(request.getParameter("precoTotal")));
-aluguel.setStatus(true);
+aluguel.setStatus(false);
 
 if(AluguelDB.inserir(aluguel)){
 	out.println(false);

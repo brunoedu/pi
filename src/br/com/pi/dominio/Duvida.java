@@ -1,11 +1,15 @@
 package br.com.pi.dominio;
 
+import java.util.Date;
+
 public class Duvida {
 	
 	private int codigo;
-	private int cliente;
+	private String cliente;
 	private String pergunta;
 	private String resposta;
+	private Date dataPergunta;
+	private Date dataResposta;
 
 	public int getCodigo() {
 		return codigo;
@@ -13,10 +17,10 @@ public class Duvida {
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
-	public int getCliente() {
+	public String getCliente() {
 		return cliente;
 	}
-	public void setCliente(int cliente) {
+	public void setCliente(String cliente) {
 		this.cliente = cliente;
 	}
 	public String getPergunta() {
@@ -30,6 +34,18 @@ public class Duvida {
 	}
 	public void setResposta(String resposta) {
 		this.resposta = resposta;
+	}
+	public Date getDataPergunta() {
+		return dataPergunta;
+	}
+	public void setDataPergunta(Date dataPergunta) {
+		this.dataPergunta = dataPergunta;
+	}
+	public Date getDataResposta() {
+		return dataResposta;
+	}
+	public void setDataResposta(Date dataResposta) {
+		this.dataResposta = dataResposta;
 	}
 
 }

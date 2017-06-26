@@ -7,7 +7,7 @@
     <dataEntrega>2017-06-03 03:00:00.0 UTC</dataEntrega>
     <seguro>true</seguro>
     <precoTotal>160.0</precoTotal>
-    <status>true</status>
+    <status>false</status>
   </aluguel>
   <aluguel>
     <codigo>2</codigo>
@@ -15,8 +15,18 @@
     <veiculo>shf4353</veiculo>
     <dataRetirada>2017-06-26 03:00:00.0 UTC</dataRetirada>
     <dataEntrega>2017-06-03 03:00:00.0 UTC</dataEntrega>
-    <seguro>true</seguro>
+    <seguro>false</seguro>
     <precoTotal>260.0</precoTotal>
+    <status>true</status>
+  </aluguel>
+  <aluguel>
+    <codigo>3</codigo>
+    <cliente>56328927659</cliente>
+    <veiculo>gah2342</veiculo>
+    <dataRetirada>2017-06-26 03:00:00.0 UTC</dataRetirada>
+    <dataEntrega>2017-06-03 03:00:00.0 UTC</dataEntrega>
+    <seguro>true</seguro>
+    <precoTotal>160.0</precoTotal>
     <status>true</status>
   </aluguel>
 </list>

@@ -1,4 +1,20 @@
-<h3 class="center-align">Veículos</h3>
+<%@page import="br.com.pi.persistencia.VeiculoDB"%>
+<%@page import="br.com.pi.dominio.Veiculo"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.text.DecimalFormat"%>
+<%
+	String pagina = request.getParameter("pagina");
+	if (pagina == null){ 
+	    pagina = "login";
+	}
+	pagina = pagina + ".jsp";
+	
+	DecimalFormat df = new DecimalFormat("###.#");
+	
+	ArrayList<Veiculo> veiculos = VeiculoDB.listar(); 
+   
+%>
+ <h3 class="center-align">Veículos</h3>
   <div class="row">
     <div class="col s12 m12">
       <div class="card">
@@ -14,40 +30,28 @@
 	              <th>Chassi</th>
 				  <th>Estado</th>
 				  <th>Preço Base</th>
+				  <th>Preço Total</th>
 	          </tr>
 	        </thead>
 	
 	        <tbody>
-	          <tr>
-	            <td>ASD-1234</td>
-	            <td>Gol 1.0</td>
-				<td>Volkswagen</td>
-				<td>2010</td>
-				<td>1234567</td>
-				<td>Em Atividade</td>
-				<td>R$ 250,00</td>
-				<td><a href="#modalEditar" data-toggle="tooltip" title="Editar"><i class="material-icons pointer cyan-text text-lighten-1">mode_edit</i></a> <a href="javascript:excluir()" data-toggle="tooltip" title="Excluir"><i class="material-icons pointer red-text text-darken-1">delete</i></a> </td>
-	          </tr>
-	          <tr>
-	           <td>ASD-1234</td>
-	            <td>Celta 1.0</td>
-				<td>Chevrolet</td>
-				<td>2006</td>
-				<td>1234567</td>
-				<td>Em Manutenção</td>
-				<td>R$ 200,00</td>
-				<td><a href="#modalEditar" data-toggle="tooltip" title="Editar"><i class="material-icons pointer cyan-text text-lighten-1">mode_edit</i></a> <a href="javascript:excluir()" data-toggle="tooltip" title="Excluir"><i class="material-icons pointer red-text text-darken-1">delete</i></a> </td>
-	          </tr>
-	          <tr>
-	            <td>ASD-1234</td>
-	            <td>Corsa 1.0</td>
-				<td>Chevrolet</td>
-				<td>2008</td>
-				<td>1234567</td>
-				<td>Em Atividade</td>
-				<td>R$ 250,00</td>
-				<td><a href="#modalEditar" data-toggle="tooltip" title="Editar"><i class="material-icons pointer cyan-text text-lighten-1">mode_edit</i></a> <a href="javascript:excluir()" data-toggle="tooltip" title="Excluir"><i class="material-icons pointer red-text text-darken-1">delete</i></a> </td>
-	          </tr>
+	          <% 
+	          	for(Veiculo veiculo:veiculos){
+	          %>
+	          	<tr>
+		            <td><%=veiculo.getPlaca() %></td>
+		            <td><%=veiculo.getModelo() %></td>
+		            <td><%=veiculo.getMarca() %></td>
+					<td><%=veiculo.getAno() %></td>
+					<td><%=veiculo.getChassi() %></td>
+					<td><%=veiculo.getEstadoVeiculo() %></td>
+					<td>R$ <%=df.format(veiculo.getPrecoBase()) %>,00</td>
+					<td>R$ <%=df.format(veiculo.getPrecoTotal()) %>,00</td>
+					<td><a href="#modalEditar" data-toggle="tooltip" title="Editar"><i class="material-icons pointer cyan-text text-lighten-1">mode_edit</i></a> <a href="javascript:excluir('<%=veiculo.getPlaca() %>', '<%=veiculo.getModelo() %>')" data-toggle="tooltip" title="Excluir"><i class="material-icons pointer red-text text-darken-1">delete</i></a> </td>
+	          	</tr>
+	          <%	
+	          	}
+	          %>
 	        </tbody>
 	      </table>
         </div>
@@ -150,9 +154,14 @@
 			ano: $('#ano').val(),
 			chassi: $('#chassi').val(),
 			estadoVeiculo: $('#estadoVeiculo').val(),
-			precoBase: $('#precoBase').val(),
+			precoBase: $('#precoBase').val().slice(0, -2),
 			adicionais: '',
+			precoTotal: '',
 		};
+		
+		console.log($('#adicionais').val().length);
+		
+		dados.precoTotal = Number($('#adicionais').val().length) * Number(30) + Number(dados.precoBase);
 		
 		$('#adicionais').val().forEach(function(adicional) {
 		    dados.adicionais += adicional+", ";
@@ -184,20 +193,30 @@
 			   		   chassi: dados.chassi,
 			   		   estadoVeiculo: dados.estadoVeiculo,
 			   		   precoBase: dados.precoBase,
+			   		   precoTotal: dados.precoTotal,
 			   		   adicionais: dados.adicionais,
 		           },
 		           type: "GET",
 	               success: function (data) {
-	            	   console.log(data);
-	                   swal({
-	                       title: "Sucesso!",
-	                       text: "Veículo cadastrado com sucesso",
-	                       type: "success",
-	                       allowEscapeKey: false,
-	          			   allowOutsideClick: false,
-	                   }).then(function () {
-		            	   location.href = "../admin/?pagina=veiculos";
-	                   });
+	            	   console.log(data.trim());
+	            	   if(data.trim()=="true"){
+		                   swal({
+		                       title: "Sucesso!",
+		                       text: "Veículo cadastrado com sucesso",
+		                       type: "success",
+		                       allowEscapeKey: false,
+		          			   allowOutsideClick: false,
+		                   }).then(function () {
+			            	   location.href = "../admin/?pagina=veiculos";
+		                   });
+	            	   }else{
+		                   swal({
+		                       title: "Erro!",
+		                       text: "Falha ao cadastrar veículo.",
+		                       type: "error",
+		                   });
+		                   setMask();
+	            	   }
 	               },
 	               error: function (data) {
 	                   console.log(data);
@@ -206,15 +225,17 @@
 	                       text: "Falha ao cadastrar veículo.",
 	                       type: "error",
 	                   });
+	                   setMask();
 	               }
 		    });
 			
 		}, 2000);
 	}
-	function excluir(){
+	function excluir(placa, nome){
+		
 		swal({
 			  title: 'Excluir veículo?',
-			  text: "Deseja realmente excluir este veículo?",
+			  text: "Deseja realmente excluir o(a) veículo(a) "+nome+"?",
 			  type: 'warning',
 			  showCancelButton: true,
 			  confirmButtonColor: '#3085d6',
@@ -222,37 +243,76 @@
 			  confirmButtonText: 'Excluir',
 			  cancelButtonText: 'Cancelar'
 			}).then(function () {
-			  swal(
-			    'Excluído!',
-			    'Veículo excluído com sucesso.',
-			    'success'
-			  )
+				swal({
+					  title: 'Excluindo',
+					  text: 'Excluindo veículo, aguarde um momento!',
+					  showConfirmButton: false,
+					  allowOutsideClick: false,
+					  allowEscapeKey: false,
+					  allowEnterKey: false,
+					  showLoaderOnConfirm: true
+				});
+				swal.showLoading();
+				setTimeout(function(){
+					$.ajax({
+				           url: "../api/excluir.jsp",
+				           data: {
+					   			placa: placa
+				           },
+				           type: "GET",
+			               success: function (data) {
+			            	   console.log(data.trim());
+			                   swal({
+			                       title: "Excluído!",
+			                       text: "Veículo excluído com sucesso",
+			                       type: "success",
+			                       allowEscapeKey: false,
+			          			   allowOutsideClick: false,
+			                   }).then(function () {
+				            	   location.href = "../admin/?pagina=veiculos";
+			                   });
+			               },
+			               error: function (data) {
+			                   console.log(data);
+			                   swal({
+			                       title: "Erro!",
+			                       text: "Falha ao excluir funcionário.",
+			                       type: "error",
+			                   });
+			               }
+				    });
+					
+				}, 2000);
 			})
+	} 
+	
+	function setMask(){
+		  $('#placa').inputmask({
+			  mask:"***-9999",
+			  showMaskOnHover: false,
+			  showMaskOnFocus: false,
+			  clearMaskOnLostFocus: true,
+			  removeMaskOnSubmit: true,
+		  });
+		  $('#ano').inputmask({
+			  mask:"9999",
+			  showMaskOnHover: false,
+			  showMaskOnFocus: false,
+			  clearMaskOnLostFocus: true,
+			  removeMaskOnSubmit: true,
+		  });
+		  $('#precoBase').inputmask({
+			  mask:"R$ 999,99",
+			  showMaskOnHover: false,
+			  showMaskOnFocus: false,
+			  clearMaskOnLostFocus: true,
+			  removeMaskOnSubmit: true,
+		  });
 	}
 	$(document).ready(function(){
 	  // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
 	  $('.modal').modal();
-	  $('select').material_select();
-	  $('#placa').inputmask({
-		  mask:"***-9999",
-		  showMaskOnHover: false,
-		  showMaskOnFocus: false,
-		  clearMaskOnLostFocus: true,
-		  removeMaskOnSubmit: true,
-	  });
-	  $('#ano').inputmask({
-		  mask:"9999",
-		  showMaskOnHover: false,
-		  showMaskOnFocus: false,
-		  clearMaskOnLostFocus: true,
-		  removeMaskOnSubmit: true,
-	  });
-	  $('#precoBase').inputmask({
-		  mask:"R$ 999,99",
-		  showMaskOnHover: false,
-		  showMaskOnFocus: false,
-		  clearMaskOnLostFocus: true,
-		  removeMaskOnSubmit: true,
-	  });
+	  $('select').material_select();	  
+	  setMask();
 	});
 </script>

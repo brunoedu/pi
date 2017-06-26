@@ -1,10 +1,20 @@
+<%@page import="br.com.pi.persistencia.PessoaDB"%>
+<%@page import="br.com.pi.persistencia.DuvidaDB"%>
+<%@page import="br.com.pi.dominio.Pessoa"%>
+<%@page import="br.com.pi.dominio.Duvida"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%
-   String funcionario = request.getParameter("funcionario");
-   String pagina = request.getParameter("pagina");
-   if (pagina == null || funcionario == null){ 
-       pagina = "login";
-   }
-   pagina = pagina + ".jsp";
+	String funcionario = request.getParameter("funcionario");
+	String pagina = request.getParameter("pagina");
+	if (pagina == null || funcionario == null){ 
+	    pagina = "login";
+	}
+	pagina = pagina + ".jsp";
+	
+	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+	
+	ArrayList<Duvida> duvidas = DuvidaDB.listar(); 
    
 %>
 <input id="funcionario" type="hidden" value="<%=funcionario%>"/>
