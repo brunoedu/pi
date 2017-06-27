@@ -1,37 +1,5 @@
 <list>
   <pessoa>
-    <nome>Orlando</nome>
-    <cpf>45769879798</cpf>
-    <cnh>12343445555</cnh>
-    <tipo>c</tipo>
-    <rg>766546546</rg>
-    <telefone>1234465465</telefone>
-    <dataNascimento>2017-12-12 02:00:00.0 UTC</dataNascimento>
-    <logradouro>Rua Coronel Tamarindo</logradouro>
-    <numero>132</numero>
-    <cidade>Guaratinguetá</cidade>
-    <estado>SP</estado>
-    <cep>12501070</cep>
-    <email>orlandobloom@amiguinho.com</email>
-    <senha>xuxubeleza</senha>
-  </pessoa>
-  <pessoa>
-    <nome>Gal</nome>
-    <cpf>51264365217</cpf>
-    <cargo>Amiguinha</cargo>
-    <tipo>f</tipo>
-    <rg>564654646</rg>
-    <telefone>5431678768</telefone>
-    <dataNascimento>2017-12-12 02:00:00.0 UTC</dataNascimento>
-    <logradouro>Praça Santos Dumont</logradouro>
-    <numero>45</numero>
-    <cidade>Guaratinguetá</cidade>
-    <estado>SP</estado>
-    <cep>12510080</cep>
-    <email>galzinha@abiguinha.com</email>
-    <senha>lalalalala</senha>
-  </pessoa>
-  <pessoa>
     <nome>Cliente</nome>
     <cpf>56328927659</cpf>
     <cnh>13215123213</cnh>
@@ -45,6 +13,22 @@
     <estado>SP</estado>
     <cep>12518710</cep>
     <email>cliente@gmail.com</email>
+    <senha>123</senha>
+  </pessoa>
+  <pessoa>
+    <nome>Funcionário</nome>
+    <cpf>21421421421</cpf>
+    <cargo>Vendedor</cargo>
+    <tipo>f</tipo>
+    <rg>124124214</rg>
+    <telefone>1241241241</telefone>
+    <dataNascimento>2017-12-12 02:00:00.0 UTC</dataNascimento>
+    <logradouro>Rua José Meirelles</logradouro>
+    <numero>101</numero>
+    <cidade>Guaratinguetá</cidade>
+    <estado>SP</estado>
+    <cep>12518710</cep>
+    <email>funcionario@gmail.com</email>
     <senha>123</senha>
   </pessoa>
 </list>
