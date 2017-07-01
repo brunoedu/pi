@@ -31,4 +31,20 @@
     <email>funcionario@gmail.com</email>
     <senha>123</senha>
   </pessoa>
+  <pessoa>
+    <nome>Teste Cliente</nome>
+    <cpf>12312312421</cpf>
+    <cnh>14214214213</cnh>
+    <tipo>c</tipo>
+    <rg>123124124</rg>
+    <telefone>1231241241</telefone>
+    <dataNascimento>2017-12-12 02:00:00.0 UTC</dataNascimento>
+    <logradouro>Rua José Meirelles</logradouro>
+    <numero>101</numero>
+    <cidade>Guaratinguetá</cidade>
+    <estado>SP</estado>
+    <cep>12518710</cep>
+    <email>testecliente@gmail.com</email>
+    <senha>123</senha>
+  </pessoa>
 </list>

@@ -29,4 +29,14 @@
     <precoTotal>160.0</precoTotal>
     <status>true</status>
   </aluguel>
+  <aluguel>
+    <codigo>4</codigo>
+    <cliente>12312312421</cliente>
+    <veiculo>gah2342</veiculo>
+    <dataRetirada>2017-06-26 03:00:00.0 UTC</dataRetirada>
+    <dataEntrega>2017-06-03 03:00:00.0 UTC</dataEntrega>
+    <seguro>true</seguro>
+    <precoTotal>160.0</precoTotal>
+    <status>false</status>
+  </aluguel>
 </list>

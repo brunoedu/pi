@@ -33,22 +33,56 @@
 	        </thead>
 	
 	        <tbody>
-	          <tr>
-	            <td>Cliente Nome</td>
-	            <td>Como alugar um carro?</td>
-				<td></td>
-				<td><a href="javascript:responder('Como alugar um carro?')" data-toggle="tooltip" title="Responder"><i class="material-icons pointer cyan-text text-lighten-1">mode_edit</i></a> <a href="javascript:excluir()" data-toggle="tooltip" title="Excluir"><i class="material-icons pointer red-text text-darken-1">delete</i></a> </td>
-	          </tr>	          
+	          <% for(Duvida duvida:duvidas){
+	        	  Pessoa cliente = PessoaDB.getByCpf(duvida.getCliente());
+	    	  %>
+		          <tr>
+		            <td><%=cliente.getNome() %></td>
+		            <td><%=duvida.getPergunta() %></td>
+		            <%if(duvida.getResposta()!=null){ %>
+						<td><%=duvida.getResposta() %></td>
+					<%}else{ %>
+						<td> - </td>
+					<%} %>
+					<td><a href="#modalRespDuvida" data-toggle="tooltip" title="Responder" onclick="javascript:setCamposResposta('<%=
+					duvida.getCodigo() %>','<%=
+					duvida.getPergunta() %>','<%=
+					duvida.getResposta() %>')"><i class="material-icons pointer cyan-text text-lighten-1">mode_edit</i></a> </td>
+		          </tr>	     
+	          <% } %>     
 	        </tbody>
 	      </table>
         </div>
       </div>
     </div>
   </div>
+  
+<input type="hidden" value="" id="respCodigo"/>
+<div id="modalRespDuvida" class="modal">
+  <div class="modal-content">
+    <h4>Responder Dúvida</h4>  
+    <div class="row">
+	    <form class="col s12" id="formulario" name="formulario" action="javascript:validar()" method="post">
+	      <h5 id="perguntaModal"></h5>
+	      <div class="row">
+	        <div class="input-field col s12">
+	          <textarea id="resposta" class="materialize-textarea"></textarea>
+	          <label for="resposta">Digite a resposta</label>
+	        </div>
+	      </div>
+	      <div class="row">
+		      <button class="btn waves-effect waves-light right cyan lighten-1" type="submit" name="action">Responder
+			    <i class="material-icons right">send</i>
+			  </button>
+	      </div>
+	    </form>
+  	</div>
+  </div>
+</div>
 <script type="text/javascript">
 	function validar(){
 		
-		var dados = {
+		/* var dados = {
 			placa: $('#placa').val(),
 			modelo: $('#modelo').val(),
 			marca: $('#marca').val(),
@@ -114,10 +148,17 @@
 	               }
 		    });
 			
-		}, 2000);
+		}, 2000); */
 	}
-	function responder(pergunta){
-		swal({
+	function setCamposResposta(codigo, pergunta, resposta){
+		console.log(codigo);
+		console.log(pergunta);
+		console.log(resposta);
+		$('#respCodigo').val(codigo);
+		$('#perguntaModal').html(pergunta);
+		if(resposta!=null)
+			$('#reposta').val(resposta);
+		/* swal({
 			  title: pergunta,
 			  input: 'textarea',
 			  showCancelButton: true,
@@ -132,7 +173,7 @@
 				        if (resposta === '' || resposta == null) {
 				          reject('Preencha corretamente a resposta.')
 				        } else {
-				          resolve()
+				          resolve();
 				        }
 				    }, 2000)
 			    })
@@ -149,27 +190,9 @@
               }).then(function () {
            	   location.href = "../funcionario/?pagina=duvidas&funcionario="+$('#funcionario').val();
               });
-			});
-	}
-	function excluir(){
-		swal({
-			  title: 'Excluir pergunta?',
-			  text: "Deseja realmente excluir esta pergunta?",
-			  type: 'warning',
-			  showCancelButton: true,
-			  confirmButtonColor: '#3085d6',
-			  cancelButtonColor: '#d33',
-			  confirmButtonText: 'Excluir',
-			  cancelButtonText: 'Cancelar'
-			}).then(function () {
-			  swal(
-			    'Excluído!',
-			    'Pergunta excluída com sucesso.',
-			    'success'
-			  )
-			})
+			}); */
 	}
 	$(document).ready(function(){
-	  
+		$('.modal').modal();
 	});
 </script>

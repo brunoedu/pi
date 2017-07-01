@@ -49,9 +49,9 @@
 	          	<tr>
 		            <td>
 		            	<%if(aluguel.isStatus()){ %>
-		            		<i class="material-icons">check_circle</i>
+		            		<i class="material-icons green-text text-darken-1">check_circle</i>
 		            	<%}else{ %>
-		            		<i class="material-icons">hourglass_empty</i>
+		            		<i class="material-icons red-text text-darken-1">hourglass_empty</i>
 		            	<%} %>
 		            </td>
 		            <td><%=cliente.getNome() %></td>
@@ -60,9 +60,9 @@
 					<td><%=dateFormat.format(aluguel.getDataEntrega()) %></td>
 					<td>
 		            	<%if(aluguel.isSeguro()){ %>
-		            		<i class="material-icons">thumb_up</i>
+		            		<i class="material-icons cyan-text text-lighten-1">thumb_up</i>
 		            	<%}else{ %>
-		            		<i class="material-icons">not_interested</i>
+		            		<i class="material-icons red-text text-darken-1">not_interested</i>
 		            	<%} %>
 		            </td>	
 		            <td>R$ <%=df.format(aluguel.getPrecoTotal()) %>,00</td>	

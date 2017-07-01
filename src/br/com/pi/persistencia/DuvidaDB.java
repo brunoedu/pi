@@ -24,11 +24,13 @@ public class DuvidaDB {
         return true;
     }
     
-    public static void alterar(Duvida duvidas){
+    public static boolean alterar(Duvida duvida){
         lerXml();
-        excluir(duvidas.getCodigo());
-        inserir(duvidas);
+        excluir(duvida.getCodigo());
+        inserir(duvida);
         salvarXml();
+        
+        return true;
     }
     
     public static void excluir(int codigo){
