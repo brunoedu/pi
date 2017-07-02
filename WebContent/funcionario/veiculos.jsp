@@ -51,7 +51,7 @@
 					<td><%=veiculo.getEstadoVeiculo() %></td>
 					<td>R$ <%=df.format(veiculo.getPrecoBase()) %>,00</td>
 					<td>R$ <%=df.format(veiculo.getPrecoTotal()) %>,00</td>
-					<td><a href="#modalEditar" data-toggle="tooltip" title="Editar"><i class="material-icons pointer cyan-text text-lighten-1">mode_edit</i></a> <a href="javascript:excluir('<%=veiculo.getPlaca() %>', '<%=veiculo.getModelo() %>')" data-toggle="tooltip" title="Excluir"><i class="material-icons pointer red-text text-darken-1">delete</i></a> </td>
+					<td><a href="#" data-toggle="tooltip" onclick="javascript:setModalEditar('<%=veiculo.getPlaca() %>')" title="Editar"><i class="material-icons pointer cyan-text text-lighten-1">mode_edit</i></a> <a href="javascript:excluir('<%=veiculo.getPlaca() %>', '<%=veiculo.getModelo() %>')" data-toggle="tooltip" title="Excluir"><i class="material-icons pointer red-text text-darken-1">delete</i></a> </td>
 	          	</tr>
 	          <%	
 	          	}
@@ -63,13 +63,77 @@
     </div>
   </div>
 
-<div id="modalEditar" class="modal">
-  <div class="modal-content">
-    <h4>Edição de Veículo</h4>
-    <p>Editar veículo</p>
-  </div>
-  <div class="modal-footer">
-    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Ok</a>
+
+<div id="modalEditarVeiculo" class="modal">
+  <div class="modal-content">    
+    <h4>Editar Veículo</h4>  
+    <div class="row">
+	    <form class="col s12" id="formularioEditar" name="formularioEditar" action="javascript:editar()" method="post">
+	      <div class="row">
+	        <div class="input-field col s6">
+	          <i class="material-icons prefix">directions_car</i>
+	          <input id="placaEditar" name="placaEditar" type="text" class="validate" required>
+	          <label id="lblPlacaEditar" for="placaEditar">Placa</label>
+	        </div>
+	        <div class="input-field col s6">
+	          <i class="material-icons prefix">directions_car</i>
+	          <input id="modeloEditar" name="modeloEditar" type="text" class="validate" required>
+	          <label id="lblModeloEditar" for="modeloEditar">Modelo</label>
+	        </div>
+	        <div class="input-field col s6">
+	          <i class="material-icons prefix">directions_car</i>
+	          <select id="marcaEditar" name="marcaEditar" required>
+		        <option value="" disabled selected>Selecione a marca</option>
+		        <option value="Volkswagen">Volkswagen</option>
+		        <option value="Chevrolet">Chevrolet</option>
+		        <option value="Fiat">Fiat</option>
+		        <option value="Pegeout">Pegeout</option>
+		        <option value="Renault">Renault</option>
+		      </select>
+	          <label id="lblMarcaEditar" for="marcaEditar">Marca</label>
+	        </div>
+	        <div class="input-field col s6">
+	          <i class="material-icons prefix">date_range</i>
+	          <input id="anoEditar" name="anoEditar" type="text" class="validate" required>
+	          <label id="lblAnoEditar" for="anoEditar">Ano</label>
+	        </div>
+	        <div class="input-field col s6">
+	          <i class="material-icons prefix">directions_car</i>
+	          <input id="chassiEditar" name="chassiEditar" type="text" class="validate" required>
+	          <label id="lblChassiEditar" for="chassiEditar">Chassi</label>
+	        </div>
+	        <div class="input-field col s6">
+	          <i class="material-icons prefix">directions_car</i>
+	          <select id="estadoVeiculoEditar" name="estadoVeiculoEditar" required>
+		        <option value="" disabled selected>Selecione o estado do veículo</option>
+		        <option value="Em Atividade">Em Atividade</option>
+		        <option value="Em Manutenção">Em Manutenção</option>
+		      </select>
+	          <label id="lblEstadoVeiculoEditar" for="estadoVeiculoEditar">Estado do Veículo</label>
+	        </div>
+	        <div class="input-field col s6">
+	          <i class="material-icons prefix">directions_car</i>
+	          <select id="adicionaisEditar" name="adicionaisEditar" multiple required>
+		        <option value="" disabled selected>Selecione os adicionais</option>
+		        <option value="Ar-condicionado">Ar-condicionado</option>
+		        <option value="Vidro Elétrico">Vidro Elétrico</option>
+		        <option value="Rádio">Rádio</option>
+		      </select>
+	          <label id="lblAdicionaisEditar" for="adicionaisEditar">Adicionais</label>
+	        </div>
+	        <div class="input-field col s6">
+	          <i class="material-icons prefix">attach_money</i>
+	          <input id="precoBaseEditar" name="precoBaseEditar" type="text" class="validate" required>
+	          <label id="lblPrecoBaseEditar" for="precoBaseEditar">Preço Base</label>
+	        </div>
+	      </div>
+	      <div class="row">
+		      <button class="btn waves-effect waves-light right cyan lighten-1" type="submit" name="action">Editar
+			    <i class="material-icons right">directions_car</i>
+			  </button>
+	      </div>
+	    </form>
+  	</div>
   </div>
 </div>
 
@@ -144,11 +208,57 @@
 	    </form>
   	</div>
   </div>
-  <!-- <div class="modal-footer">
-    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Ok</a>
-  </div> -->
 </div>
 <script type="text/javascript">
+	function setModalEditar(placa){
+		console.log(placa);
+		
+		swal({
+			  title: 'Editar Veículo',
+			  text: 'Carregando dados de veículo, aguarde um momento!',
+			  showConfirmButton: false,
+			  allowOutsideClick: false,
+			  allowEscapeKey: false,
+			  allowEnterKey: false,
+			  showLoaderOnConfirm: true
+		});
+		swal.showLoading();
+		
+		setTimeout(function(){
+			$.ajax({
+		           url: "../api/objetoVeiculo.jsp",
+		           data: {
+		        	   placa: placa,
+		           },
+		           type: "GET",
+	               success: function (data) {
+	            	   console.log(data.trim());
+	            	   var veiculo = JSON.parse(data.trim());
+	            	   console.log(veiculo);
+	            	   $('#placaEditar').val(veiculo.placa);
+	            	   $("#lblPlacaEditar").addClass("active");
+	            	   $('#modeloEditar').val(veiculo.modelo);
+	            	   $("#lblModeloEditar").addClass("active");
+	            	   $('#marcaEditar').val(veiculo.marca);	            	   
+	            	   swal.close();	            	   
+	            	   $('#modalEditarVeiculo').modal('open');
+	            	   
+	               },
+	               error: function (data) {
+	                   console.log(data);
+	                   swal({
+	                       title: "Erro!",
+	                       text: "Falha ao carregar dados de veículo.",
+	                       type: "error",
+	                   });
+	               }
+		    });
+			
+		}, 1000);
+		
+	}
+	
+	
 	function validar(){
 		
 		var dados = {
@@ -288,7 +398,94 @@
 					
 				}, 2000);
 			})
-	} 
+	}
+	
+	function editar(){
+		
+		var dados = {
+			placa: $('#placaEditar').val(),
+			modelo: $('#modeloEditar').val(),
+			marca: $('#marcaEditar').val(),
+			ano: $('#anoEditar').val(),
+			chassi: $('#chassiEditar').val(),
+			estadoVeiculo: $('#estadoVeiculoEditar').val(),
+			precoBase: $('#precoBaseEditar').val().slice(0, -2),
+			adicionais: '',
+			precoTotal: '',
+		};
+		
+		console.log($('#adicionaisEditar').val().length);
+		
+		dados.precoTotal = Number($('#adicionaisEditar').val().length) * Number(30) + Number(dados.precoBase);
+		
+		$('#adicionaisEditar').val().forEach(function(adicional) {
+		    dados.adicionais += adicional+", ";
+		});
+		
+		dados.adicionais = dados.adicionais.slice(0, -2);
+		
+		console.log(dados);
+		
+		swal({
+			  title: 'Edição de Veículo',
+			  text: 'Efetuando edição, aguarde um momento!',
+			  showConfirmButton: false,
+			  allowOutsideClick: false,
+			  allowEscapeKey: false,
+			  allowEnterKey: false,
+			  showLoaderOnConfirm: true
+		});
+		swal.showLoading();
+		
+		setTimeout(function(){
+			$.ajax({
+		           url: "../api/editarVeiculo.jsp",
+		           data: {
+		        	   placa: dados.placa,
+			   		   modelo: dados.modelo,
+			   		   marca: dados.marca,
+			   		   ano: dados.ano,
+			   		   chassi: dados.chassi,
+			   		   estadoVeiculo: dados.estadoVeiculo,
+			   		   precoBase: dados.precoBase,
+			   		   precoTotal: dados.precoTotal,
+			   		   adicionais: dados.adicionais,
+		           },
+		           type: "GET",
+	               success: function (data) {
+	            	   console.log(data.trim());
+	            	   if(data.trim()=="true"){
+		                   swal({
+		                       title: "Sucesso!",
+		                       text: "Veículo editado com sucesso",
+		                       type: "success",
+		                       allowEscapeKey: false,
+		          			   allowOutsideClick: false,
+		                   }).then(function () {
+			            	   location.href = "../funcionario/?pagina=veiculos&funcionario="+$('#funcionario').val();
+		                   });
+	            	   }else{
+		                   swal({
+		                       title: "Erro!",
+		                       text: "Falha ao editar veículo.",
+		                       type: "error",
+		                   });
+		                   setMask();
+	            	   }
+	               },
+	               error: function (data) {
+	                   console.log(data);
+	                   swal({
+	                       title: "Erro!",
+	                       text: "Falha ao editar veículo.",
+	                       type: "error",
+	                   });
+	                   setMask();
+	               }
+		    });
+			
+		}, 2000);
+	}
 	
 	function setMask(){
 		  $('#placa').inputmask({
@@ -306,6 +503,28 @@
 			  removeMaskOnSubmit: true,
 		  });
 		  $('#precoBase').inputmask({
+			  mask:"R$ 999,99",
+			  showMaskOnHover: false,
+			  showMaskOnFocus: false,
+			  clearMaskOnLostFocus: true,
+			  removeMaskOnSubmit: true,
+		  });
+		  
+		  $('#placaEditar').inputmask({
+			  mask:"***-9999",
+			  showMaskOnHover: false,
+			  showMaskOnFocus: false,
+			  clearMaskOnLostFocus: true,
+			  removeMaskOnSubmit: true,
+		  });
+		  $('#anoEditar').inputmask({
+			  mask:"9999",
+			  showMaskOnHover: false,
+			  showMaskOnFocus: false,
+			  clearMaskOnLostFocus: true,
+			  removeMaskOnSubmit: true,
+		  });
+		  $('#precoBaseEditar').inputmask({
 			  mask:"R$ 999,99",
 			  showMaskOnHover: false,
 			  showMaskOnFocus: false,

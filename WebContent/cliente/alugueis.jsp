@@ -109,7 +109,7 @@
 		$('#dataRetiradaModal').html(dataRetirada);
 		$('#dataEntregaModal').html(dataEntrada);
 		$('#precoTotalModal').html(valor);
-		if(seguro)
+		if(seguro=="true")
 			$('#seguroModal').html('<i class="material-icons">thumb_up</i>');
 		else
 			$('#seguroModal').html('<i class="material-icons">not_interested</i>');

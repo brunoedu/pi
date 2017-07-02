@@ -24,11 +24,13 @@ public class AluguelDB {
         return true;
     }
     
-    public static void alterar(Aluguel aluguel){
+    public static boolean alterar(Aluguel aluguel){
         lerXml();
         excluir(aluguel.getCodigo());
         inserir(aluguel);
         salvarXml();
+        
+        return true;
     }
     
     public static void excluir(int codigo){

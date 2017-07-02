@@ -44,10 +44,7 @@
 					<%}else{ %>
 						<td> - </td>
 					<%} %>
-					<td><a href="#modalRespDuvida" data-toggle="tooltip" title="Responder" onclick="javascript:setCamposResposta('<%=
-					duvida.getCodigo() %>','<%=
-					duvida.getPergunta() %>','<%=
-					duvida.getResposta() %>')"><i class="material-icons pointer cyan-text text-lighten-1">mode_edit</i></a> </td>
+					<td><a href="#modalRespDuvida" data-toggle="tooltip" title="Responder" onclick="javascript:setCamposResposta('<%=duvida.getCodigo()%>','<%=duvida.getResposta()%>')"><i class="material-icons pointer cyan-text text-lighten-1">mode_edit</i></a> </td>
 		          </tr>	     
 	          <% } %>     
 	        </tbody>
@@ -66,8 +63,8 @@
 	      <h5 id="perguntaModal"></h5>
 	      <div class="row">
 	        <div class="input-field col s12">
-	          <textarea id="resposta" class="materialize-textarea"></textarea>
-	          <label for="resposta">Digite a resposta</label>
+	          <textarea id="resposta" name="resposta" class="materialize-textarea"></textarea>
+	          <label id="lblResposta" for="resposta">Digite a resposta</label>
 	        </div>
 	      </div>
 	      <div class="row">
@@ -82,28 +79,16 @@
 <script type="text/javascript">
 	function validar(){
 		
-		/* var dados = {
-			placa: $('#placa').val(),
-			modelo: $('#modelo').val(),
-			marca: $('#marca').val(),
-			ano: $('#ano').val(),
-			chassi: $('#chassi').val(),
-			estadoVeiculo: $('#estadoVeiculo').val(),
-			precoBase: $('#precoBase').val(),
-			adicionais: '',
+		var dados = {
+			codigo: $('#respCodigo').val(),
+			resposta: $('#resposta').val()
 		};
-		
-		$('#adicionais').val().forEach(function(adicional) {
-		    dados.adicionais += adicional+", ";
-		});
-		
-		dados.adicionais = dados.adicionais.slice(0, -2);
 		
 		console.log(dados);
 		
 		swal({
-			  title: 'Cadastro de Veículo',
-			  text: 'Efetuando cadastro, aguarde um momento!',
+			  title: 'Cadastro de Resposta',
+			  text: 'Efetuando cadastro de resposta, aguarde um momento!',
 			  showConfirmButton: false,
 			  allowOutsideClick: false,
 			  allowEscapeKey: false,
@@ -114,50 +99,48 @@
 		
 		setTimeout(function(){
 			$.ajax({
-		           url: "../api/cadastrarVeiculo.jsp",
-		           data: {
-		        	   placa: dados.placa,
-			   		   modelo: dados.modelo,
-			   		   marca: dados.marca,
-			   		   ano: dados.ano,
-			   		   chassi: dados.chassi,
-			   		   estadoVeiculo: dados.estadoVeiculo,
-			   		   precoBase: dados.precoBase,
-			   		   adicionais: dados.adicionais,
+		           url: "../api/responderDuvida.jsp",
+		           data: {		        	   
+			   		   codigo: dados.codigo,
+			   		   resposta: dados.resposta,
 		           },
 		           type: "GET",
 	               success: function (data) {
 	            	   console.log(data);
 	                   swal({
 	                       title: "Sucesso!",
-	                       text: "Veículo cadastrado com sucesso",
+	                       text: "Resposta cadastrada com sucesso",
 	                       type: "success",
 	                       allowEscapeKey: false,
 	          			   allowOutsideClick: false,
 	                   }).then(function () {
-		            	   location.href = "../funcionario/?pagina=veiculos&funcionario="+$('#funcionario').val();
+		            	   location.href = "../funcionario/?pagina=duvidas&funcionario="+$('#funcionario').val();
 	                   });
 	               },
 	               error: function (data) {
 	                   console.log(data);
 	                   swal({
 	                       title: "Erro!",
-	                       text: "Falha ao cadastrar veículo.",
+	                       text: "Falha ao cadastrar resposta.",
 	                       type: "error",
 	                   });
 	               }
 		    });
 			
-		}, 2000); */
+		}, 2000);
 	}
-	function setCamposResposta(codigo, pergunta, resposta){
+	function setCamposResposta(codigo, resposta){
 		console.log(codigo);
-		console.log(pergunta);
+		//console.log(pergunta);
 		console.log(resposta);
+		$("textarea[name='resposta']").val("");
+		$("#lblResposta").removeClass("active");
 		$('#respCodigo').val(codigo);
-		$('#perguntaModal').html(pergunta);
-		if(resposta!=null)
-			$('#reposta').val(resposta);
+		//$('#perguntaModal').html(pergunta);
+		if(resposta!="null"){
+			$("textarea[name='resposta']").val(resposta);
+			$("#lblResposta").addClass("active");
+		}
 		/* swal({
 			  title: pergunta,
 			  input: 'textarea',

@@ -3,8 +3,7 @@
 <%@page import="java.util.Date"%>
 <%
 
-Duvida duvida = DuvidaDB.getByCodigo(request.getParameter("codigo"));
-duvida.setFuncionario(request.getParameter("funcionario"));
+Duvida duvida = DuvidaDB.getByCodigo(Integer.parseInt(request.getParameter("codigo")));
 duvida.setResposta(request.getParameter("resposta"));
 
 Date dataResposta = new Date();

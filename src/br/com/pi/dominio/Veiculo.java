@@ -73,5 +73,16 @@ public class Veiculo {
 	public void setAdicionais(String adicionais) {
 		this.adicionais = adicionais;
 	}
+	public String getObject(){
+		return "{\"placa\":\""+getPlaca()+"\","+
+			    "\"chassi\":\""+getChassi()+"\","+
+			    "\"ano\":"+getAno()+","+
+			    "\"modelo\":\""+getModelo()+"\","+
+			    "\"marca\":\""+getMarca()+"\","+
+			    "\"estadoVeiculo\":\""+getEstadoVeiculo()+"\","+
+			    "\"precoBase\":"+getPrecoBase()+","+
+			    "\"precoTotal\":"+getPrecoTotal()+","+
+			    "\"adicionais\":\""+getAdicionais()+"\"}";
+	}
 
 }
