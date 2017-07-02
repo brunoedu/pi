@@ -24,6 +24,11 @@
 	        </thead>
 	
 	        <tbody>
+	          <% if (funcionarios.size() == 0){ %>
+	          	<tr>
+	          		<td class="center" colspan="6">Ainda não existem funcionários cadastrados.</td>
+	          	</tr>
+	          <%} %>  
 	          <% 
 	          	for(Pessoa funcionario:funcionarios){
 	          %>
@@ -193,7 +198,7 @@
 			   			cargo: dados.cargo,
 			   			rg: dados.rg,	
 			   			telefone: dados.telefone,	
-			   			dataNascimento: '12/12/2017',
+			   			dataNascimento: dados.dataNascimento,
 			   			logradouro: dados.logradouro,
 			   			numero: dados.numero,
 			   			cidade: dados.cidade,
@@ -268,15 +273,23 @@
 				           type: "GET",
 			               success: function (data) {
 			            	   console.log(data.trim());
-			                   swal({
-			                       title: "Excluído!",
-			                       text: "Funcionário excluído com sucesso",
-			                       type: "success",
-			                       allowEscapeKey: false,
-			          			   allowOutsideClick: false,
-			                   }).then(function () {
-				            	   location.href = "../admin/?pagina=funcionarios";
-			                   });
+			            	   if(data.trim()=="true"){
+				                   swal({
+				                       title: "Excluído!",
+				                       text: "Funcionário excluído com sucesso",
+				                       type: "success",
+				                       allowEscapeKey: false,
+				          			   allowOutsideClick: false,
+				                   }).then(function () {
+					            	   location.href = "../admin/?pagina=funcionarios";
+				                   });
+			            	   }else{
+				                   swal({
+				                       title: "Erro!",
+				                       text: "Falha ao excluir funcionário, pois, ele está relacionado a um aluguel no momento.",
+				                       type: "error",
+				                   });
+			               	   }
 			               },
 			               error: function (data) {
 			                   console.log(data);
@@ -345,6 +358,7 @@
   		  showMaskOnFocus: false,
   		  clearMaskOnLostFocus: true,
   		  removeMaskOnSubmit: true,
+  		  clearIncomplete: true,
   	  });
   	  $('#rg').inputmask({
   		  mask:"99.999.999-*",
@@ -352,6 +366,7 @@
   		  showMaskOnFocus: false,
   		  clearMaskOnLostFocus: true,
   		  removeMaskOnSubmit: true,
+  		  clearIncomplete: true,
   	  });
   	  $('#cpf').inputmask({
   		  mask:"999.999.999-99",
@@ -359,6 +374,7 @@
   		  showMaskOnFocus: false,
   		  clearMaskOnLostFocus: true,
   		  removeMaskOnSubmit: true,
+  		  clearIncomplete: true,
   	  });
   	  $('#cep').inputmask({
   		  mask:"99999-999",
@@ -366,6 +382,7 @@
   		  showMaskOnFocus: false,
   		  clearMaskOnLostFocus: true,
   		  removeMaskOnSubmit: true,
+  		  clearIncomplete: true,
   	  });
     }
 	$(document).ready(function(){
@@ -373,7 +390,8 @@
 		$('select').material_select();
 	    $('.datepicker').pickadate({
 		    selectMonths: true,
-		    selectYears: 90
+		    selectYears: 90,
+		    format: 'dd/mm/yyyy'
 	  	  });
 		setMask();
 	});

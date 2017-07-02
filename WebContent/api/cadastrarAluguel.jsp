@@ -14,7 +14,7 @@ boolean seguro = request.getParameter("seguro").equals("true")?true:false;
 
 Aluguel aluguel = new Aluguel();
 aluguel.setCliente(request.getParameter("cliente"));
-aluguel.setFuncionario(request.getParameter("funcionario"));
+aluguel.setFuncionario("");
 aluguel.setVeiculo(request.getParameter("veiculo"));
 aluguel.setDataRetirada(dataRetirada);
 aluguel.setDataEntrega(dataEntrega);

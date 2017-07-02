@@ -21,7 +21,12 @@
 	          </tr>
 	        </thead>
 	
-	        <tbody>	        
+	        <tbody>	  
+	          <% if (clientes.size() == 0){ %>
+	          	<tr>
+	          		<td class="center" colspan="5">Ainda não existem clientes cadastrados.</td>
+	          	</tr>
+	          <%} %>        
 	          <% 
 	          	for(Pessoa cliente:clientes){
 	          %>
@@ -74,15 +79,23 @@
 				           type: "GET",
 			               success: function (data) {
 			            	   console.log(data.trim());
-			                   swal({
-			                       title: "Excluído!",
-			                       text: "Cliente excluído com sucesso",
-			                       type: "success",
-			                       allowEscapeKey: false,
-			          			   allowOutsideClick: false,
-			                   }).then(function () {
-				            	   location.href = "../admin/?pagina=clientes";
-			                   });
+			            	   if(data.trim()=="true"){
+				                   swal({
+				                       title: "Excluído!",
+				                       text: "Cliente excluído com sucesso",
+				                       type: "success",
+				                       allowEscapeKey: false,
+				          			   allowOutsideClick: false,
+				                   }).then(function () {
+					            	   location.href = "../admin/?pagina=clientes";
+				                   });
+			            	   }else{
+		            		      swal({
+				                       title: "Erro!",
+				                       text: "Falha ao excluir cliente, pois, ele está relacionado a um aluguel ou uma dúvida no momento.",
+				                       type: "error",
+				                   });				               	   
+			            	   }
 			               },
 			               error: function (data) {
 			                   console.log(data);

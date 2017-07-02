@@ -30,6 +30,17 @@
  </nav>
 <div class="container">
   <h3 class="center-align">Nossos Veículos</h3>
+  <% if (veiculos.size() == 0){ %>
+  <div class="row center">
+     <div class="col s12 m12">
+       <div class="card">
+         <div class="card-content">
+           <p>Não existem veículos disponíveis no momento.</p>
+         </div>
+       </div>
+     </div>
+   </div>
+   <%} %>
   <div class="row">
     <% 
 	  for(Veiculo veiculo:veiculos){
@@ -75,7 +86,7 @@
       <div class="row">      
         <div class="input-field col s6">
 	      <i class="material-icons prefix">security</i>
-          <input id="seguro" type="checkbox" id="test5" />
+          <input id="seguro" type="checkbox" />
           <label for="seguro">Seguro</label>
         </div>
       </div>
@@ -103,13 +114,11 @@
 		var dados = {
 			dataRetirada: $('#dataRetirada').val(),
 			dataEntrega: $('#dataEntrega').val(),
-			seguro: '',
+			seguro: $('#seguro').prop('checked'),
 			veiculo: $('#veiculoAluguel').val(),
 			precoTotal: $('#preco').val(),
 		};
-			
-		dados.seguro = $('#seguro').val()=='on' ? true:false;
-				
+						
 		console.log(dados);
 		
 		swal({
@@ -128,8 +137,8 @@
 		           url: "../api/cadastrarAluguel.jsp",
 		           data: {
 		        	   cliente: $('#cliente').val(),
-		        	   dataRetirada: "26/06/2017",
-		        	   dataEntrega: "03/06/2017",
+		        	   dataRetirada: dados.dataRetirada,
+		        	   dataEntrega: dados.dataEntrega,
 		        	   seguro: dados.seguro,
 		        	   veiculo: dados.veiculo,
 		        	   precoTotal: dados.precoTotal,
@@ -171,8 +180,9 @@
 	  // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
 	  $('.modal').modal();
 	  $('.datepicker').pickadate({
-		    selectMonths: true, // Creates a dropdown to control month
-		    selectYears: 15 // Creates a dropdown of 15 years to control year
+		    selectMonths: true,
+		    selectYears: 15,
+		    format: 'dd/mm/yyyy'
 	  });
 	});
 </script>

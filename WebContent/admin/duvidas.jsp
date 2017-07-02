@@ -1,5 +1,24 @@
-
- <h3 class="center-align">Dúvidas</h3>
+<%@page import="br.com.pi.persistencia.PessoaDB"%>
+<%@page import="br.com.pi.persistencia.DuvidaDB"%>
+<%@page import="br.com.pi.dominio.Pessoa"%>
+<%@page import="br.com.pi.dominio.Duvida"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%
+	String pagina = request.getParameter("pagina");
+	if ((pagina != null) && (pagina.equals("cadastro"))){
+	     
+	}else if (pagina == null){
+	    pagina = "login";
+	}
+	pagina = pagina + ".jsp";
+	
+	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+	
+	ArrayList<Duvida> duvidas = DuvidaDB.listar(); 
+   
+%>
+ <h3 class="center-align">Dúvidas Recebidas</h3>
   <div class="row">
     <div class="col s12 m12">
       <div class="card">
@@ -14,43 +33,67 @@
 	        </thead>
 	
 	        <tbody>
-	          <tr>
-	            <td>Cliente Nome</td>
-	            <td>Como alugar um carro?</td>
-				<td></td>
-				<td><a href="javascript:responder('Como alugar um carro?')" data-toggle="tooltip" title="Responder"><i class="material-icons pointer cyan-text text-lighten-1">mode_edit</i></a> <a href="javascript:excluir()" data-toggle="tooltip" title="Excluir"><i class="material-icons pointer red-text text-darken-1">delete</i></a> </td>
-	          </tr>	          
+	          <% if (duvidas.size() == 0){ %>
+	          	<tr>
+	          		<td class="center" colspan="3">Ainda não existem dúvidas recebidas.</td>
+	          	</tr>
+	          <%} %>  
+	          <% for(Duvida duvida:duvidas){
+	        	  Pessoa cliente = PessoaDB.getByCpf(duvida.getCliente());
+	    	  %>
+		          <tr>
+		            <td><%=cliente.getNome() %></td>
+		            <td><%=duvida.getPergunta() %></td>
+		            <%if(duvida.getResposta()!=null){ %>
+						<td><%=duvida.getResposta() %></td>
+					<%}else{ %>
+						<td> - </td>
+					<%} %>
+					<td><a href="#modalRespDuvida" data-toggle="tooltip" title="Responder" onclick="javascript:setCamposResposta('<%=duvida.getCodigo()%>','<%=duvida.getResposta()%>')"><i class="material-icons pointer cyan-text text-lighten-1">mode_edit</i></a> </td>
+		          </tr>	     
+	          <% } %>     
 	        </tbody>
 	      </table>
         </div>
       </div>
     </div>
   </div>
+  
+<input type="hidden" value="" id="respCodigo"/>
+<div id="modalRespDuvida" class="modal">
+  <div class="modal-content">
+    <h4>Responder Dúvida</h4>  
+    <div class="row">
+	    <form class="col s12" id="formulario" name="formulario" action="javascript:validar()" method="post">
+	      <h5 id="perguntaModal"></h5>
+	      <div class="row">
+	        <div class="input-field col s12">
+	          <textarea id="resposta" name="resposta" class="materialize-textarea"></textarea>
+	          <label id="lblResposta" for="resposta">Digite a resposta</label>
+	        </div>
+	      </div>
+	      <div class="row">
+		      <button class="btn waves-effect waves-light right cyan lighten-1" type="submit" name="action">Responder
+			    <i class="material-icons right">send</i>
+			  </button>
+	      </div>
+	    </form>
+  	</div>
+  </div>
+</div>
 <script type="text/javascript">
 	function validar(){
 		
 		var dados = {
-			placa: $('#placa').val(),
-			modelo: $('#modelo').val(),
-			marca: $('#marca').val(),
-			ano: $('#ano').val(),
-			chassi: $('#chassi').val(),
-			estadoVeiculo: $('#estadoVeiculo').val(),
-			precoBase: $('#precoBase').val(),
-			adicionais: '',
+			codigo: $('#respCodigo').val(),
+			resposta: $('#resposta').val()
 		};
-		
-		$('#adicionais').val().forEach(function(adicional) {
-		    dados.adicionais += adicional+", ";
-		});
-		
-		dados.adicionais = dados.adicionais.slice(0, -2);
 		
 		console.log(dados);
 		
 		swal({
-			  title: 'Cadastro de Veículo',
-			  text: 'Efetuando cadastro, aguarde um momento!',
+			  title: 'Cadastro de Resposta',
+			  text: 'Efetuando cadastro de resposta, aguarde um momento!',
 			  showConfirmButton: false,
 			  allowOutsideClick: false,
 			  allowEscapeKey: false,
@@ -61,35 +104,29 @@
 		
 		setTimeout(function(){
 			$.ajax({
-		           url: "../api/cadastrarVeiculo.jsp",
-		           data: {
-		        	   placa: dados.placa,
-			   		   modelo: dados.modelo,
-			   		   marca: dados.marca,
-			   		   ano: dados.ano,
-			   		   chassi: dados.chassi,
-			   		   estadoVeiculo: dados.estadoVeiculo,
-			   		   precoBase: dados.precoBase,
-			   		   adicionais: dados.adicionais,
+		           url: "../api/responderDuvida.jsp",
+		           data: {		        	   
+			   		   codigo: dados.codigo,
+			   		   resposta: dados.resposta,
 		           },
 		           type: "GET",
 	               success: function (data) {
 	            	   console.log(data);
 	                   swal({
 	                       title: "Sucesso!",
-	                       text: "Veículo cadastrado com sucesso",
+	                       text: "Resposta cadastrada com sucesso",
 	                       type: "success",
 	                       allowEscapeKey: false,
 	          			   allowOutsideClick: false,
 	                   }).then(function () {
-		            	   location.href = "../admin/?pagina=veiculos";
+		            	   location.href = "../admin/?pagina=duvidas";
 	                   });
 	               },
 	               error: function (data) {
 	                   console.log(data);
 	                   swal({
 	                       title: "Erro!",
-	                       text: "Falha ao cadastrar veículo.",
+	                       text: "Falha ao cadastrar resposta.",
 	                       type: "error",
 	                   });
 	               }
@@ -97,60 +134,20 @@
 			
 		}, 2000);
 	}
-	function responder(pergunta){
-		swal({
-			  title: pergunta,
-			  input: 'textarea',
-			  showCancelButton: true,
-			  confirmButtonText: 'Responder',
-			  cancelButtonText: 'Cancelar',
-			  confirmButtonColor: '#3085d6',
-			  cancelButtonColor: '#d33',
-			  showLoaderOnConfirm: true,
-			  preConfirm: function (resposta) {
-			    return new Promise(function (resolve, reject) {
-			    	setTimeout(function() {
-				        if (resposta === '' || resposta == null) {
-				          reject('Preencha corretamente a resposta.')
-				        } else {
-				          resolve()
-				        }
-				    }, 2000)
-			    })
-			  },
-			  allowOutsideClick: false,
-              allowEscapeKey: false,
-			}).then(function (resposta) {			
-			  swal({
-                  title: "Sucesso!",
-                  text: "Pergunta respondida com sucesso",
-                  type: "success",
-                  allowEscapeKey: false,
-     			   allowOutsideClick: false,
-              }).then(function () {
-           	   location.href = "../admin/?pagina=duvidas";
-              });
-			});
-	}
-	function excluir(){
-		swal({
-			  title: 'Excluir pergunta?',
-			  text: "Deseja realmente excluir esta pergunta?",
-			  type: 'warning',
-			  showCancelButton: true,
-			  confirmButtonColor: '#3085d6',
-			  cancelButtonColor: '#d33',
-			  confirmButtonText: 'Excluir',
-			  cancelButtonText: 'Cancelar'
-			}).then(function () {
-			  swal(
-			    'Excluído!',
-			    'Pergunta excluída com sucesso.',
-			    'success'
-			  )
-			})
+	function setCamposResposta(codigo, resposta){
+		console.log(codigo);
+		//console.log(pergunta);
+		console.log(resposta);
+		$("textarea[name='resposta']").val("");
+		$("#lblResposta").removeClass("active");
+		$('#respCodigo').val(codigo);
+		//$('#perguntaModal').html(pergunta);
+		if(resposta!="null"){
+			$("textarea[name='resposta']").val(resposta);
+			$("#lblResposta").addClass("active");
+		}
 	}
 	$(document).ready(function(){
-	  
+		$('.modal').modal();
 	});
 </script>

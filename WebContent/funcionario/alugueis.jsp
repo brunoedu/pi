@@ -40,7 +40,12 @@
 	          </tr>
 	        </thead>
 	
-	        <tbody>	        
+	        <tbody>	
+	          <% if (alugueis.size() == 0){ %>
+	          	<tr>
+	          		<td class="center" colspan="7">Ainda não existem aluguéis solicitados.</td>
+	          	</tr>
+	          <%} %>        
 	          <% 
 	          	for(Aluguel aluguel:alugueis){
 				  Pessoa cliente = PessoaDB.getByCpf(aluguel.getCliente());
@@ -156,6 +161,7 @@
 				           url: "../api/aceitarAluguel.jsp",
 				           data: {
 				        	   codigo: codigo,
+				        	   funcionario: $('#funcionario').val(),
 				           },
 				           type: "GET",
 			               success: function (data) {

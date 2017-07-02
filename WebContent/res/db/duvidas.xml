@@ -1,27 +1,8 @@
 <list>
   <duvida>
     <codigo>1</codigo>
-    <cliente>12312312421</cliente>
-    <pergunta>O que?
-</pergunta>
-    <dataPergunta>2017-07-01 14:31:15.237 UTC</dataPergunta>
-  </duvida>
-  <duvida>
-    <codigo>3</codigo>
-    <cliente>56328927659</cliente>
-    <pergunta>porque?
-</pergunta>
-    <resposta>teesteeee</resposta>
-    <dataPergunta>2017-07-02 00:09:32.624 UTC</dataPergunta>
-    <dataResposta>2017-07-02 00:50:40.350 UTC</dataResposta>
-  </duvida>
-  <duvida>
-    <codigo>3</codigo>
-    <cliente>56328927659</cliente>
-    <pergunta>alooooo
-</pergunta>
-    <resposta>teste</resposta>
-    <dataPergunta>2017-07-02 00:16:20.434 UTC</dataPergunta>
-    <dataResposta>2017-07-02 02:20:12.901 UTC</dataResposta>
+    <cliente>41241241241</cliente>
+    <pergunta>Minha Duvida</pergunta>
+    <dataPergunta>2017-07-02 17:45:43.913 UTC</dataPergunta>
   </duvida>
 </list>

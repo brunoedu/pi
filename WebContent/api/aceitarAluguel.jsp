@@ -3,6 +3,7 @@
 <%
 
 Aluguel aluguel = AluguelDB.getByCodigo(Integer.parseInt(request.getParameter("codigo")));
+aluguel.setFuncionario(request.getParameter("funcionario"));
 aluguel.setStatus(true);
 
 if(AluguelDB.alterar(aluguel)){

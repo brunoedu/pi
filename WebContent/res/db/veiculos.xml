@@ -1,35 +1,13 @@
 <list>
   <veiculo>
-    <placa>gah2342</placa>
-    <chassi>gfdgdfh</chassi>
-    <ano>2001</ano>
-    <modelo>Gol 1.0</modelo>
-    <marca>Volkswagen</marca>
-    <estadoVeiculo>Em Atividade</estadoVeiculo>
-    <precoBase>100.0</precoBase>
-    <precoTotal>160.0</precoTotal>
-    <adicionais>Vidro Elétrico, Rádio</adicionais>
-  </veiculo>
-  <veiculo>
-    <placa>shf4353</placa>
-    <chassi>kmslgkmfsdlkh</chassi>
-    <ano>2005</ano>
-    <modelo>Celta 1.0</modelo>
+    <placa>ASD4123</placa>
+    <chassi>ljfhkagfajbllh</chassi>
+    <ano>2016</ano>
+    <modelo>Cruze 2.0</modelo>
     <marca>Chevrolet</marca>
     <estadoVeiculo>Em Atividade</estadoVeiculo>
     <precoBase>200.0</precoBase>
-    <precoTotal>260.0</precoTotal>
-    <adicionais>Ar-condicionado, Vidro Elétrico</adicionais>
-  </veiculo>
-  <veiculo>
-    <placa>ohk1305</placa>
-    <chassi>hdfhsdfhdf</chassi>
-    <ano>2004</ano>
-    <modelo>Golf</modelo>
-    <marca>Volkswagen</marca>
-    <estadoVeiculo>Em Atividade</estadoVeiculo>
-    <precoBase>230.0</precoBase>
     <precoTotal>290.0</precoTotal>
-    <adicionais>Ar-condicionado, Vidro Elétrico</adicionais>
+    <adicionais>Ar-condicionado, Vidro Elétrico, Rádio</adicionais>
   </veiculo>
 </list>

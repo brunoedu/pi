@@ -98,4 +98,28 @@ public class AluguelDB {
         }
         return aluguelEncontrado;
     }
+    
+
+    public static boolean verifyVeiculo(String placa){
+        lerXml();
+        for(int i=0; i < lista.size(); i++){
+        	Aluguel cadaAluguel = lista.get(i);        	
+            if (cadaAluguel.getVeiculo().equals(placa)){
+            	return true;
+            }
+        }
+        return false;
+    }
+    
+
+    public static boolean verifyPessoa(String cpf){
+        lerXml();
+        for(int i=0; i < lista.size(); i++){
+        	Aluguel cadaAluguel = lista.get(i);        	
+            if (cadaAluguel.getCliente().equals(cpf)||cadaAluguel.getFuncionario().equals(cpf)){
+            	return true;
+            }
+        }
+        return false;
+    }
 }

@@ -33,6 +33,11 @@
 	        </thead>
 	
 	        <tbody>
+	          <% if (duvidas.size() == 0){ %>
+	          	<tr>
+	          		<td class="center" colspan="3">Ainda não existem dúvidas recebidas.</td>
+	          	</tr>
+	          <%} %>  
 	          <% for(Duvida duvida:duvidas){
 	        	  Pessoa cliente = PessoaDB.getByCpf(duvida.getCliente());
 	    	  %>

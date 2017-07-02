@@ -160,7 +160,7 @@
 			   			cnh: dados.cnh,
 			   			rg: dados.rg,	
 			   			telefone: dados.telefone,	
-			   			dataNascimento: '12/12/2017',
+			   			dataNascimento: dados.dataNascimento,
 			   			logradouro: dados.logradouro,
 			   			numero: dados.numero,
 			   			cidade: dados.cidade,
@@ -260,6 +260,7 @@
   		  showMaskOnFocus: false,
   		  clearMaskOnLostFocus: true,
   		  removeMaskOnSubmit: true,
+  		  clearIncomplete: true,
   	  });
   	  $('#tel').inputmask({
   		  mask:"(99) 9999-9999",
@@ -267,6 +268,7 @@
   		  showMaskOnFocus: false,
   		  clearMaskOnLostFocus: true,
   		  removeMaskOnSubmit: true,
+  		  clearIncomplete: true,
   	  });
   	  $('#rg').inputmask({
   		  mask:"99.999.999-*",
@@ -274,6 +276,7 @@
   		  showMaskOnFocus: false,
   		  clearMaskOnLostFocus: true,
   		  removeMaskOnSubmit: true,
+  		  clearIncomplete: true,
   	  });
   	  $('#cpf').inputmask({
   		  mask:"999.999.999-99",
@@ -281,6 +284,7 @@
   		  showMaskOnFocus: false,
   		  clearMaskOnLostFocus: true,
   		  removeMaskOnSubmit: true,
+  		  clearIncomplete: true,
   	  });
   	  $('#cep').inputmask({
   		  mask:"99999-999",
@@ -288,6 +292,7 @@
   		  showMaskOnFocus: false,
   		  clearMaskOnLostFocus: true,
   		  removeMaskOnSubmit: true,
+  		  clearIncomplete: true,
   	  });
     }
 	
@@ -297,7 +302,8 @@
 	  //$('footer').css('padding-left','');
 	  $('.datepicker').pickadate({
 	    selectMonths: true,
-	    selectYears: 90
+	    selectYears: 90,
+	    format: 'dd/mm/yyyy'
   	  });
 
 	  setMask();

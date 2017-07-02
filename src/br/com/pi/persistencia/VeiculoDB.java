@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import com.thoughtworks.xstream.XStream;
 
+import br.com.pi.dominio.Pessoa;
 import br.com.pi.dominio.Veiculo;
 
 public class VeiculoDB {
@@ -33,14 +34,17 @@ public class VeiculoDB {
         return veiculoEncontrado;
     }
     
-    public static void alterar(Veiculo veiculo){
+    public static boolean alterar(Veiculo veiculo){
         lerXml();
-        excluir(veiculo.getPlaca());
-        inserir(veiculo);
+        excluirEditar(veiculo.getPlaca());
+        boolean alterado = inserir(veiculo);
         salvarXml();
+        
+        return alterado;
     }
     
-    public static void excluir(String placa){
+
+    public static void excluirEditar(String placa){
         lerXml();
         for(int i=0; i < lista.size(); i++){
             Veiculo vei = lista.get(i);
@@ -51,9 +55,45 @@ public class VeiculoDB {
         salvarXml();
     }
     
+    public static boolean excluir(String placa){
+        lerXml();
+        
+        if(AluguelDB.verifyVeiculo(placa))
+        	return false;
+        
+        for(int i=0; i < lista.size(); i++){
+            Veiculo vei = lista.get(i);
+            if (vei.getPlaca().equals(placa)){
+                lista.remove(i);
+            }
+        }
+        salvarXml();
+        
+        return true;
+    }
+    
     public static ArrayList<Veiculo> listar(){     
         lerXml();
-        return lista;
+        ArrayList<Veiculo> veiculosDisponiveis = new ArrayList<Veiculo>();
+        for(int i=0; i < lista.size(); i++){
+            Veiculo vei = lista.get(i);
+            if (vei.getEstadoVeiculo().equals("Em Atividade")){
+            	veiculosDisponiveis.add(vei);
+            }
+        }
+        return veiculosDisponiveis;
+    }
+    
+    public static ArrayList<Veiculo> listarFunc(){    
+        lerXml();
+        ArrayList<Veiculo> veiculosDisponiveis = new ArrayList<Veiculo>();
+        for(int i=0; i < lista.size(); i++){
+            Veiculo vei = lista.get(i);
+            if (!vei.getEstadoVeiculo().equals("Desativado")){
+            	veiculosDisponiveis.add(vei);
+            }
+        }
+        return veiculosDisponiveis;
     }
     
     private static void lerXml(){

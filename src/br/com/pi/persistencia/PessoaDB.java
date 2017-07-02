@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import com.thoughtworks.xstream.XStream;
 
 import br.com.pi.dominio.Pessoa;
+import br.com.pi.dominio.Veiculo;
 
 public class PessoaDB {
 	private static String caminho = Conexao.CAMINHO;
@@ -35,12 +36,12 @@ public class PessoaDB {
     
     public static void alterar(Pessoa pessoa){
         lerXml();
-        excluir(pessoa.getCpf());
+        excluirEditar(pessoa.getCpf());
         inserir(pessoa);
         salvarXml();
     }
     
-    public static void excluir(String cpf){
+    public static void excluirEditar(String cpf){
         lerXml();
         for(int i=0; i < lista.size(); i++){
             Pessoa pes = lista.get(i);
@@ -50,6 +51,28 @@ public class PessoaDB {
         }
         salvarXml();
     }
+    
+    public static boolean excluir(String cpf){
+        lerXml();
+        
+        if(AluguelDB.verifyPessoa(cpf))
+        	return false;
+        
+
+        if(DuvidaDB.verifyPessoa(cpf))
+        	return false;
+        
+        for(int i=0; i < lista.size(); i++){
+            Pessoa pes = lista.get(i);
+            if (pes.getCpf().equals(cpf)){
+                lista.remove(i);
+            }
+        }
+        salvarXml();
+        
+        return true;
+    }
+    
     public static ArrayList<Pessoa> listar(){     
         lerXml();
         return lista;

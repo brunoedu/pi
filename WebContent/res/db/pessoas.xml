@@ -1,50 +1,34 @@
 <list>
   <pessoa>
-    <nome>Cliente</nome>
-    <cpf>56328927659</cpf>
-    <cnh>13215123213</cnh>
+    <nome>Bruno</nome>
+    <cpf>41241241241</cpf>
+    <cnh>12312312312</cnh>
     <tipo>c</tipo>
-    <rg>958230749</rg>
-    <telefone>1516463465</telefone>
-    <dataNascimento>2017-12-12 02:00:00.0 UTC</dataNascimento>
+    <rg>412412412</rg>
+    <telefone>4124124124</telefone>
+    <dataNascimento>2017-07-02 03:00:00.0 UTC</dataNascimento>
     <logradouro>Rua José Meirelles</logradouro>
     <numero>101</numero>
     <cidade>Guaratinguetá</cidade>
     <estado>SP</estado>
     <cep>12518710</cep>
-    <email>cliente@gmail.com</email>
+    <email>bruno@gmail.com</email>
     <senha>123</senha>
   </pessoa>
   <pessoa>
-    <nome>Funcionário</nome>
-    <cpf>21421421421</cpf>
-    <cargo>Vendedor</cargo>
+    <nome>Nathalia</nome>
+    <cpf>14214124214</cpf>
+    <cargo>Vendedora</cargo>
     <tipo>f</tipo>
-    <rg>124124214</rg>
-    <telefone>1241241241</telefone>
-    <dataNascimento>2017-12-12 02:00:00.0 UTC</dataNascimento>
+    <rg>412412421</rg>
+    <telefone>4124124124</telefone>
+    <dataNascimento>2017-07-02 03:00:00.0 UTC</dataNascimento>
     <logradouro>Rua José Meirelles</logradouro>
     <numero>101</numero>
     <cidade>Guaratinguetá</cidade>
     <estado>SP</estado>
     <cep>12518710</cep>
-    <email>funcionario@gmail.com</email>
-    <senha>123</senha>
-  </pessoa>
-  <pessoa>
-    <nome>Teste Cliente</nome>
-    <cpf>12312312421</cpf>
-    <cnh>14214214213</cnh>
-    <tipo>c</tipo>
-    <rg>123124124</rg>
-    <telefone>1231241241</telefone>
-    <dataNascimento>2017-12-12 02:00:00.0 UTC</dataNascimento>
-    <logradouro>Rua José Meirelles</logradouro>
-    <numero>101</numero>
-    <cidade>Guaratinguetá</cidade>
-    <estado>SP</estado>
-    <cep>12518710</cep>
-    <email>testecliente@gmail.com</email>
+    <email>nathalia@gmail.com</email>
     <senha>123</senha>
   </pessoa>
 </list>

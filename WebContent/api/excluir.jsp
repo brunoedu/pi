@@ -2,8 +2,13 @@
 <%@page import="br.com.pi.persistencia.VeiculoDB"%>
 <%
 
-PessoaDB.excluir(request.getParameter("cpf"));
-VeiculoDB.excluir(request.getParameter("placa"));
+if(request.getParameter("cpf")!=null){
+	out.println(PessoaDB.excluir(request.getParameter("cpf")));
+}
+
+if(request.getParameter("placa")!=null){
+	out.println(VeiculoDB.excluir(request.getParameter("placa")));
+}
 
 
 %>

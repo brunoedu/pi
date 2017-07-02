@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import com.thoughtworks.xstream.XStream;
 
+import br.com.pi.dominio.Aluguel;
 import br.com.pi.dominio.Duvida;
 
 public class DuvidaDB {
@@ -97,5 +98,16 @@ public class DuvidaDB {
             }
         }
         return duvidaEncontrada;
+    }
+    
+    public static boolean verifyPessoa(String cpf){
+        lerXml();
+        for(int i=0; i < lista.size(); i++){
+        	Duvida cadaDuvida = lista.get(i);        	
+            if (cadaDuvida.getCliente().equals(cpf)){
+            	return true;
+            }
+        }
+        return false;
     }
 }

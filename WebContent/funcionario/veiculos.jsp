@@ -14,7 +14,7 @@
 	
 	DecimalFormat df = new DecimalFormat("###.#");
 	
-	ArrayList<Veiculo> veiculos = VeiculoDB.listar(); 
+	ArrayList<Veiculo> veiculos = VeiculoDB.listarFunc(); 
    
 %>
 <input id="funcionario" type="hidden" value="<%=funcionario%>"/>
@@ -39,6 +39,11 @@
 	        </thead>
 	
 	        <tbody>
+	          <% if (veiculos.size() == 0){ %>
+	          	<tr>
+	          		<td class="center" colspan="8">Ainda não existem veículos cadastrados.</td>
+	          	</tr>
+	          <%} %>  
 	          <% 
 	          	for(Veiculo veiculo:veiculos){
 	          %>
@@ -237,9 +242,25 @@
 	            	   console.log(veiculo);
 	            	   $('#placaEditar').val(veiculo.placa);
 	            	   $("#lblPlacaEditar").addClass("active");
+	            	   $("#placaEditar").prop("disabled", true);
 	            	   $('#modeloEditar').val(veiculo.modelo);
 	            	   $("#lblModeloEditar").addClass("active");
-	            	   $('#marcaEditar').val(veiculo.marca);	            	   
+	            	   $("select[name='marcaEditar']").val(veiculo.marca);
+	            	   $("#marcaEditar").material_select();
+	            	   $('#anoEditar').val(veiculo.ano);
+	            	   $("#lblAnoEditar").addClass("active");
+	            	   $('#chassiEditar').val(veiculo.chassi);
+	            	   $("#lblChassiEditar").addClass("active");
+	            	   $("select[name='estadoVeiculoEditar']").val(veiculo.estadoVeiculo);
+	            	   $("#estadoVeiculoEditar").material_select();
+	            	   var adicionais = veiculo.adicionais.split(",");
+	            	   for(a of adicionais){	            		   
+	            		   //$("select[name='adicionaisEditar']").val(a.trim());
+	            		   $("#adicionaisEditar option[value='" + a.trim() + "']").prop("selected", true);
+	            	   }
+	            	   $("#adicionaisEditar").material_select();
+	            	   $('#precoBaseEditar').val(veiculo.precoBase+"00");
+	            	   $("#lblPrecoBaseEditar").addClass("active");
 	            	   swal.close();	            	   
 	            	   $('#modalEditarVeiculo').modal('open');
 	            	   
@@ -376,21 +397,29 @@
 				           type: "GET",
 			               success: function (data) {
 			            	   console.log(data.trim());
-			                   swal({
-			                       title: "Excluído!",
-			                       text: "Veículo excluído com sucesso",
-			                       type: "success",
-			                       allowEscapeKey: false,
-			          			   allowOutsideClick: false,
-			                   }).then(function () {
-				            	   location.href = "../funcionario/?pagina=veiculos&funcionario="+$('#funcionario').val();
-			                   });
+			            	   if(data.trim()=="true"){
+				                   swal({
+				                       title: "Excluído!",
+				                       text: "Veículo excluído com sucesso",
+				                       type: "success",
+				                       allowEscapeKey: false,
+				          			   allowOutsideClick: false,
+				                   }).then(function () {
+					            	   location.href = "../funcionario/?pagina=veiculos&funcionario="+$('#funcionario').val();
+				                   });
+			               	   }else{
+				                   swal({
+				                       title: "Erro!",
+				                       text: "Falha ao excluir veículo, pois, ele está relacionado a um aluguel no momento.",
+				                       type: "error",
+				                   });
+			               	   }
 			               },
 			               error: function (data) {
 			                   console.log(data);
 			                   swal({
 			                       title: "Erro!",
-			                       text: "Falha ao excluir funcionário.",
+			                       text: "Falha ao excluir veículo.",
 			                       type: "error",
 			                   });
 			               }
@@ -494,6 +523,7 @@
 			  showMaskOnFocus: false,
 			  clearMaskOnLostFocus: true,
 			  removeMaskOnSubmit: true,
+	  		  clearIncomplete: true,
 		  });
 		  $('#ano').inputmask({
 			  mask:"9999",
@@ -501,6 +531,7 @@
 			  showMaskOnFocus: false,
 			  clearMaskOnLostFocus: true,
 			  removeMaskOnSubmit: true,
+	  		  clearIncomplete: true,
 		  });
 		  $('#precoBase').inputmask({
 			  mask:"R$ 999,99",
@@ -508,6 +539,7 @@
 			  showMaskOnFocus: false,
 			  clearMaskOnLostFocus: true,
 			  removeMaskOnSubmit: true,
+	  		  clearIncomplete: true,
 		  });
 		  
 		  $('#placaEditar').inputmask({
@@ -516,6 +548,7 @@
 			  showMaskOnFocus: false,
 			  clearMaskOnLostFocus: true,
 			  removeMaskOnSubmit: true,
+	  		  clearIncomplete: true,
 		  });
 		  $('#anoEditar').inputmask({
 			  mask:"9999",
@@ -523,6 +556,7 @@
 			  showMaskOnFocus: false,
 			  clearMaskOnLostFocus: true,
 			  removeMaskOnSubmit: true,
+	  		  clearIncomplete: true,
 		  });
 		  $('#precoBaseEditar').inputmask({
 			  mask:"R$ 999,99",
@@ -530,6 +564,7 @@
 			  showMaskOnFocus: false,
 			  clearMaskOnLostFocus: true,
 			  removeMaskOnSubmit: true,
+	  		  clearIncomplete: true,
 		  });
 	}
 	$(document).ready(function(){
